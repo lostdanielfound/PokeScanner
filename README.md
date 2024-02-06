@@ -8,17 +8,19 @@ A real-life Pokedex that allows you to scan the area for Pkmn using your phone's
 
 ### Screens
 
-- [ ] Home Menu - Start of the application, it give you the options to select the Pokedex Journel or Video Screen
-[Img]
+- [ ] Home Menu - Starts off with the camera view being active. From here the user has the option to take a picture or move over to a different screen through the bottom nativation menu.
 
-- [ ] Pokedex Journel - Should you all the pkmn that have been classified so far within the generation 1 pokedex. Should allow the user to access the `pkmn info screen` of a selected pkmn only if they have classified it through the `Video Screen`
-[Img]
+![Home screen](wireframes/HomeScreen.png)
 
-- [ ] Pkmn info - A screen accessable through the Pokedex when a pkmn is selected, shows the various info of the pkmn such as pokedex #, pkmn name, species, etc. 
-[Img]
+- [ ] Pokedex Journel - Should you all the pkmn that have been classified so far within the generation 1 pokedex. Should allow the user to access the `pkmn info screen` of a selected pkmn only if they have classified it by taking a picture of it.
 
-- [ ] Video Screen - A video stream that is used to begin classifing pkmn within the stream, when a pkmn is classified a rectangle shape should appear showing details of that pkmn. 
-[Img]
+![Pokedex Screen](wireframes/PokedexScreen.png)
+
+- [ ] Pkmn info - A screen accessable through the Pokedex when a pkmn is selected, shows the various info of the pkmn such as pokedex #, pkmn name, species, and image of identification.
+
+- [ ] Stats - Stats of using the application so far, how many pkmn you have captured, how many images you have taken, and total pkmn entries completed.
+
+![Stats Screen](wireframes/StatsScreen.png)
 
 ### Made With
 
