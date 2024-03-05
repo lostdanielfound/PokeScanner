@@ -9,6 +9,10 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.example.pokescanner.screens.HomeScreen
 import com.example.pokescanner.screens.StatsScreen
 import com.example.pokescanner.ui.theme.PokeScannerTheme
 
@@ -22,12 +26,21 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    val num_DEBUG1 = (0..50).random()
-                    val num_DEBUG2 = (0..50).random()
-                    val num_DEBUG3 = (0..50).random()
+                    /**
+                     * Data sourcing before application starts up
+                     */
+                    val currentStats = Stats(10, 5, 2)
 
-                    val stats = Stats(num_DEBUG1, num_DEBUG2, num_DEBUG3)
-                    StatsScreen(stats = stats)
+
+                    /**
+                     * Navigation controls of the application
+                     */
+                    val navController = rememberNavController()
+
+                    NavHost(navController = navController, startDestination = "home") {
+                        composable("home") { HomeScreen( { navController.navigate("stats") } ) }
+                        composable("stats") { StatsScreen(currentStats) }
+                    }
                 }
             }
         }
