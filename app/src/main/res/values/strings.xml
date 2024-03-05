@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">PokeScanner</string>
+    <string name="total_image_taken_en">Total Images Taken</string>
+    <string name="total_pkmn_captured_en">Total Pkmn Captured</string>
+    <string name="total_pkmn_entries_en">Total Pkmn Entires Completed</string>
+    <string name="github_plug">Github: https://github.com/lostdanielfound/PokeScanner</string>
+    <string name="dev_note_1_en">Application Developed by: Daniel Guzman</string>
+</resources>
