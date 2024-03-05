@@ -1,6 +1,7 @@
 package com.example.pokescanner.screens
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -36,7 +37,7 @@ fun StatsScreen(stats: Stats, modifier: Modifier = Modifier) {
             modifier = Modifier
                 .fillMaxWidth()
                 .clip(shape = RoundedCornerShape(12.dp))
-                .background(Color(0xffd9d9d9))
+                .background(if (isSystemInDarkTheme()) Color(0xff2c2c2c) else Color(0xffd9d9d9))
                 .padding(horizontal = 12.dp, vertical = 24.dp)
         ) {
             StatText(
