@@ -26,7 +26,7 @@ fun HomeScreen(onNavigateToStats: () -> Unit, modifier: Modifier = Modifier) {
             .padding(12.dp)
     ) {
         Button(onClick = { onNavigateToStats() }) {
-            Text("Navigate to State screen")
+            Text("Navigate to Journal screen")
         }
     }
 }
