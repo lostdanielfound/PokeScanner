@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -34,11 +35,11 @@ import com.example.pokescanner.datasource.Pkmn
 fun EntryCardRow(pkmn: Pkmn, modifier: Modifier = Modifier) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.SpaceEvenly,
         modifier = Modifier
             .padding(8.dp)
             .clip(CircleShape)
             .background(Color(0xffc8c8c8))
+            .fillMaxWidth()
     ) {
         val borderWidth = 4.dp
         Image(
@@ -108,4 +109,10 @@ fun JournalScreen(modifier: Modifier = Modifier) {
 @Composable
 fun PreviewJournal() {
     JournalScreen()
+}
+
+@Preview(showBackground = true)
+@Composable
+fun RowSample() {
+    EntryCardRow(pkmn = LoadPkmnData().LoadData()[0])
 }
