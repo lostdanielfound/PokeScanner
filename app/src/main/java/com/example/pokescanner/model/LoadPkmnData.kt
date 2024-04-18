@@ -1,7 +1,6 @@
-package com.example.pokescanner.datasource
+package com.example.pokescanner.model
 
 import com.example.pokescanner.R
-import com.example.pokescanner.datasource.Pkmn
 
 class LoadPkmnData {
     fun LoadData(): List<Pkmn> {

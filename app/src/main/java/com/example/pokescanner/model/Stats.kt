@@ -1,4 +1,4 @@
-package com.example.pokescanner
+package com.example.pokescanner.model
 
 data class Stats(
     val totalImagesTaken: Int,

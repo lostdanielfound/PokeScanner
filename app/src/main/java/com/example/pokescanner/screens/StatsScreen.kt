@@ -20,7 +20,7 @@ import androidx.compose.ui.unit.dp
 import com.example.pokescanner.composables.FooterNote
 import com.example.pokescanner.R
 import com.example.pokescanner.composables.StatText
-import com.example.pokescanner.Stats
+import com.example.pokescanner.model.Stats
 
 @Composable
 fun StatsScreen(stats: Stats, modifier: Modifier = Modifier) {

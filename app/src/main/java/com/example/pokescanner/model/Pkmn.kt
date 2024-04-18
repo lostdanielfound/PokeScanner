@@ -1,4 +1,4 @@
-package com.example.pokescanner.datasource
+package com.example.pokescanner.model
 
 import androidx.annotation.DrawableRes
 
