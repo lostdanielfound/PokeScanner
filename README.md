@@ -5,6 +5,7 @@ A real-life Pokedex that allows you to scan the area for Pkmn using your phone's
 
 - [ ] Generation 1 Pkmn classification
 - [ ] Pokedex Journel 
+- [ ] Stats screen to view overall image captured
 
 ### Screens
 
@@ -22,8 +23,14 @@ A real-life Pokedex that allows you to scan the area for Pkmn using your phone's
 
 ![Stats Screen](wireframes/StatsScreen.png)
 
+### Progress
+#### **5/7/2024** 
+Currently, the plans on how the user will interact with the application have been made. A database schemea
+has been made to represent how the stateful data should be stored using the Room API in Kotlin. The next steps are to 
+develop the UI that follows the ViewModel Arch, along with creating a Navigation interface between all screen. These screens
+shouldn't operate and should only act as Views for the moment. 
+
 ### Made With
 
-- Python
-- Kivy
+- Kotlin
 - Tensorflow
