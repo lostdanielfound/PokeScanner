@@ -32,3 +32,14 @@ val Typography = Typography(
     )
     */
 )
+
+//TODO: Need to create a font family for ubuntu typeface
+/**
+ * val ubuntuFontFamily = FontFamily(
+ *     Font(R.font.ubuntu_bold, FontWeight.Bold)
+ *     ...
+ *     ...
+ * )
+ */
+
+//TODO: Need to create typography styles with ubuntu typeface
