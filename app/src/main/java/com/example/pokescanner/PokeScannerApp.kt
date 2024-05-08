@@ -2,6 +2,7 @@ package com.example.pokescanner
 
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Info
@@ -12,6 +13,7 @@ import androidx.compose.material.icons.outlined.List
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -22,16 +24,20 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
+import androidx.navigation.Navigation
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.pokescanner.screens.AppViewModel
 import com.example.pokescanner.screens.HomeScreen
+import com.example.pokescanner.screens.JournalScreen
+import com.example.pokescanner.screens.StatsScreen
 
-enum class NavigationOptions{
-    Journal,
-    Home,
-    Stats
+
+sealed class NavigationScreen(val route: String, val title: String){
+    data object Journal : NavigationScreen("Journal", "Pokedex")
+    data object Home : NavigationScreen("Home", "Home")
+    data object Stats : NavigationScreen("Stats", "Capture Stats")
 }
 
 @Composable
@@ -41,35 +47,55 @@ fun PokeScannerApp(
 ) {
     val uiState by viewModel.uiState.collectAsState()
 
-    NavHost(
-        navController = navController,
-        startDestination = NavigationOptions.Home.name
-    ) {
-        composable(NavigationOptions.Home.name) {
-            HomeScreen(modifier = Modifier.fillMaxSize())
+    Scaffold(
+        bottomBar = {
             ButtomNavBar(navController = navController)
         }
+    ) {
+        NavHost(
+            navController = navController,
+            startDestination = NavigationScreen.Home.route,
+            modifier = Modifier
+                .padding(it)
+        ) {
+            composable(NavigationScreen.Journal.route) {
+                JournalScreen()
+            }
+            composable(NavigationScreen.Home.route) {
+                HomeScreen(modifier = Modifier.fillMaxSize())
+            }
+            composable(NavigationScreen.Stats.route) {
+                StatsScreen(stats = uiState.stats)
+            }
+        }
     }
+    
 
 
 }
 
 @Composable
 fun ButtomNavBar(navController: NavHostController) {
-    val navigationOptions = listOf("Journal", "Home", "Stats")
     val navigationFittedIcons = listOf(Icons.Filled.List, Icons.Filled.Home, Icons.Filled.Info)
     val navigationOutlinedIcons = listOf(Icons.Outlined.List, Icons.Outlined.Home, Icons.Outlined.Info)
 
-    var selectedOption by remember { mutableIntStateOf(0) }
+    val screens = listOf(
+        NavigationScreen.Journal,
+        NavigationScreen.Home,
+        NavigationScreen.Stats,
+    )
+
+    var selectedOption by remember { mutableIntStateOf(1) }
+
 
     NavigationBar {
-        navigationOptions.forEachIndexed{ index, option ->
+        screens.forEachIndexed{ index, option ->
             NavigationBarItem(
                 selected = (selectedOption == index),
                 onClick = {
                     selectedOption = index
-                    navController.navigate(option) },
-                label = { Text(option) },
+                    navController.navigate(option.route) },
+                label = { Text(option.title) },
                 icon = {
                     if(index == selectedOption) {
                         Icon(
