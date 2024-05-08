@@ -1,6 +1,5 @@
 package com.example.pokescanner
 
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
@@ -24,7 +23,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
-import androidx.navigation.Navigation
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -49,7 +47,7 @@ fun PokeScannerApp(
 
     Scaffold(
         bottomBar = {
-            ButtomNavBar(navController = navController)
+            BottomNavBar(navController = navController)
         }
     ) {
         NavHost(
@@ -69,13 +67,10 @@ fun PokeScannerApp(
             }
         }
     }
-    
-
-
 }
 
 @Composable
-fun ButtomNavBar(navController: NavHostController) {
+fun BottomNavBar(navController: NavHostController) {
     val navigationFittedIcons = listOf(Icons.Filled.List, Icons.Filled.Home, Icons.Filled.Info)
     val navigationOutlinedIcons = listOf(Icons.Outlined.List, Icons.Outlined.Home, Icons.Outlined.Info)
 
