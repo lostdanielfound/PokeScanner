@@ -2,44 +2,111 @@ package com.example.pokescanner.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.pokescanner.R
 
-// Set of Material typography styles to start with
-val Typography = Typography(
-    bodyLarge = TextStyle(
-        fontFamily = FontFamily.Default,
-        fontWeight = FontWeight.Normal,
-        fontSize = 16.sp,
-        lineHeight = 24.sp,
-        letterSpacing = 0.5.sp
-    )
-    /* Other default text styles to override
-    titleLarge = TextStyle(
-        fontFamily = FontFamily.Default,
-        fontWeight = FontWeight.Normal,
-        fontSize = 22.sp,
-        lineHeight = 28.sp,
-        letterSpacing = 0.sp
-    ),
-    labelSmall = TextStyle(
-        fontFamily = FontFamily.Default,
-        fontWeight = FontWeight.Medium,
-        fontSize = 11.sp,
-        lineHeight = 16.sp,
-        letterSpacing = 0.5.sp
-    )
-    */
+val ubuntuFontFamily = FontFamily(
+    Font(R.font.ubuntu_regular, FontWeight.Normal),
+    Font(R.font.ubuntu_bold, FontWeight.Bold),
+    Font(R.font.ubuntu_light, FontWeight.Light),
+    Font(R.font.ubuntu_medium, FontWeight.Medium)
 )
 
-//TODO: Need to create a font family for ubuntu typeface
-/**
- * val ubuntuFontFamily = FontFamily(
- *     Font(R.font.ubuntu_bold, FontWeight.Bold)
- *     ...
- *     ...
- * )
- */
+val Typography = Typography(
+    displayLarge = TextStyle(
+        fontSize = 57.sp,
+        fontFamily = ubuntuFontFamily,
+        fontWeight = FontWeight.Normal,
+        lineHeight = 64.sp,
+    ),
+    displayMedium = TextStyle(
+        fontSize = 45.sp,
+        fontFamily = ubuntuFontFamily,
+        fontWeight = FontWeight.Normal,
+        lineHeight = 52.sp,
+    ),
+    displaySmall = TextStyle(
+        fontSize = 36.sp,
+        fontFamily = ubuntuFontFamily,
+        fontWeight = FontWeight.Normal,
+        lineHeight = 44.sp,
+    ),
+    headlineLarge = TextStyle(
+        fontSize = 32.sp,
+        fontFamily = ubuntuFontFamily,
+        fontWeight = FontWeight.Normal,
+        lineHeight = 40.sp,
+    ),
+    headlineMedium = TextStyle(
+        fontSize = 28.sp,
+        fontFamily = ubuntuFontFamily,
+        fontWeight = FontWeight.Normal,
+        lineHeight = 36.sp,
+    ),
+    headlineSmall = TextStyle(
+        fontSize = 24.sp,
+        fontFamily = ubuntuFontFamily,
+        fontWeight = FontWeight.Normal,
+        lineHeight = 32.sp,
+    ),
+    titleLarge = TextStyle(
+        fontSize = 22.sp,
+        fontFamily = ubuntuFontFamily,
+        fontWeight = FontWeight.Normal,
+        lineHeight = 28.sp,
+    ),
+    titleMedium = TextStyle(
+        fontSize = 16.sp,
+        fontFamily = ubuntuFontFamily,
+        fontWeight = FontWeight.Normal,
+        lineHeight = 24.sp,
+    ),
+    titleSmall = TextStyle(
+        fontSize = 14.sp,
+        fontFamily = ubuntuFontFamily,
+        fontWeight = FontWeight.Normal,
+        lineHeight = 20.sp,
+    ),
+    bodySmall = TextStyle(
+        fontSize = 12.sp,
+        fontFamily = ubuntuFontFamily,
+        fontWeight = FontWeight.Normal,
+        lineHeight = 16.sp,
+    ),
+    bodyMedium = TextStyle(
+        fontSize = 14.sp,
+        fontFamily = ubuntuFontFamily,
+        fontWeight = FontWeight.Normal,
+        lineHeight = 20.sp,
+    ),
+    bodyLarge = TextStyle(
+        fontSize = 16.sp,
+        fontFamily = ubuntuFontFamily,
+        fontWeight = FontWeight.Normal,
+        lineHeight = 24.sp,
+    ),
+    labelSmall = TextStyle(
+        fontSize = 11.sp,
+        fontFamily = ubuntuFontFamily,
+        fontWeight = FontWeight.Normal,
+        lineHeight = 16.sp,
+    ),
+    labelMedium = TextStyle(
+        fontSize = 12.sp,
+        fontFamily = ubuntuFontFamily,
+        fontWeight = FontWeight.Normal,
+        lineHeight = 16.sp,
+    ),
+    labelLarge = TextStyle(
+        fontSize = 14.sp,
+        fontFamily = ubuntuFontFamily,
+        fontWeight = FontWeight.Normal,
+        lineHeight = 20.sp,
+    ),
 
-//TODO: Need to create typography styles with ubuntu typeface
+)
