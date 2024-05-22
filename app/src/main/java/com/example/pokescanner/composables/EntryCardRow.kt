@@ -25,7 +25,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.pokescanner.R
-import com.example.pokescanner.model.Pkmn
 
 @Composable
 fun EntryCardRow(pkmn: Pkmn, modifier: Modifier = Modifier) {

@@ -1,7 +1,7 @@
 package com.example.pokescanner.screens
 
 import androidx.lifecycle.ViewModel
-import com.example.pokescanner.model.Stats
+import com.example.pokescanner.composables.Stats
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
