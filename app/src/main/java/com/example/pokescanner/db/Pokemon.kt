@@ -1,16 +1,19 @@
 package com.example.pokescanner.db
 
+import androidx.annotation.DrawableRes
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity
 data class Pokemon(
-    @PrimaryKey(autoGenerate = true) val pkmnID: Int,
-    @ColumnInfo(name = "name") val name: String,
-    @ColumnInfo(name = "species") val species: String,
-    @ColumnInfo(name = "types") val types: List<String>,
-    @ColumnInfo(name = "height") val height: Double, // Metric Meters
-    @ColumnInfo(name = "weight") val weight: Double, // Metric Kilograms
-    @ColumnInfo(name = "description") val description: String
+    @PrimaryKey(autoGenerate = true) @ColumnInfo(name = "ID") val ID: Int,
+    @ColumnInfo(name = "Name") val name: String,
+    @ColumnInfo(name = "Species") val species: String,
+    @ColumnInfo(name = "Type1") val type1: String,
+    @ColumnInfo(name = "Type2") val type2: String?,
+    @ColumnInfo(name = "Height") val height: Float, // Metric Meters
+    @ColumnInfo(name = "Weight") val weight: Float, // Metric Kilograms
+    @ColumnInfo(name = "Description") val description: String,
+    @ColumnInfo(name = "Thumbnail") val thumbnail: String //Blob
 )
