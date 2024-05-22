@@ -10,7 +10,7 @@ data class Pokemon(
     @ColumnInfo(name = "name") val name: String,
     @ColumnInfo(name = "species") val species: String,
     @ColumnInfo(name = "types") val types: List<String>,
-    @ColumnInfo(name = "height") val height: Double,
-    @ColumnInfo(name = "weight") val weight: Double,
+    @ColumnInfo(name = "height") val height: Double, // Metric Meters
+    @ColumnInfo(name = "weight") val weight: Double, // Metric Kilograms
     @ColumnInfo(name = "description") val description: String
 )
