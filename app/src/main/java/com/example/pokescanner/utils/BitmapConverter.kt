@@ -17,7 +17,7 @@ object BitmapConverter {
         return try {
             val encodeByte = Base64.decode(encodedString, Base64.DEFAULT)
             BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.size)
-        } catch (e:Exception) {
+        } catch (e: Exception) {
             e.printStackTrace()
             null
         }

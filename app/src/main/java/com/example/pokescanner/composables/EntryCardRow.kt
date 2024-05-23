@@ -19,15 +19,19 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ImageBitmap
+import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.pokescanner.R
+import com.example.pokescanner.db.Pokemon
+import com.example.pokescanner.utils.BitmapConverter
 
 @Composable
-fun EntryCardRow(pkmn: Pkmn, modifier: Modifier = Modifier) {
+fun EntryCardRow(pkmn: Pokemon, modifier: Modifier = Modifier) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier
@@ -37,22 +41,22 @@ fun EntryCardRow(pkmn: Pkmn, modifier: Modifier = Modifier) {
             .fillMaxWidth()
     ) {
         val borderWidth = 4.dp
-        Image(
-            painterResource(
-                pkmn.thumbnail ?: R.drawable.question
-            ),
-            contentDescription = pkmn.name,
-            contentScale = ContentScale.Fit,
-            modifier = Modifier
-                .size(88.dp)
-                .border(
-                    BorderStroke(borderWidth, Color.LightGray),
-                    CircleShape
-                )
-                .padding(borderWidth)
-                .clip(CircleShape)
-                .background(Color.White)
-        )
+        BitmapConverter.converterStringToBitmap(pkmn.thumbnail)?.let {
+            Image(
+                bitmap = it.asImageBitmap(),
+                contentDescription = pkmn.name,
+                contentScale = ContentScale.Fit,
+                modifier = Modifier
+                    .size(88.dp)
+                    .border(
+                        BorderStroke(borderWidth, Color.LightGray),
+                        CircleShape
+                    )
+                    .padding(borderWidth)
+                    .clip(CircleShape)
+                    .background(Color.White)
+            )
+        }
         Spacer(modifier = Modifier.width(16.dp))
         Column(
             modifier = Modifier
@@ -64,7 +68,7 @@ fun EntryCardRow(pkmn: Pkmn, modifier: Modifier = Modifier) {
                     .padding(start = 4.dp, end = 8.dp)
             ) {
                 Text(
-                    text = "#" + pkmn.id.toString(),
+                    text = "#" + pkmn.ID.toString(),
                     fontWeight = FontWeight.Bold,
                     fontSize = 16.sp,
                     modifier = Modifier
@@ -81,7 +85,7 @@ fun EntryCardRow(pkmn: Pkmn, modifier: Modifier = Modifier) {
                     .padding(4.dp)
             ) {
                 Text(
-                    text = pkmn.pokeDexEntry,
+                    text = pkmn.description,
                     style = MaterialTheme.typography.bodyLarge
                 )
             }
