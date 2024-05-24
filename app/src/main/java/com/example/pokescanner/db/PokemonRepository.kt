@@ -1,7 +1,7 @@
 package com.example.pokescanner.db
 
-import androidx.lifecycle.LiveData
+import kotlinx.coroutines.flow.Flow
 
 class PokemonRepository(private val pokemonDao: PokemonDao) {
-    val readAllPokemon: LiveData<List<Pokemon>> = pokemonDao.readAllPokemon()
+    val readAllPokemon: Flow<List<Pokemon>> = pokemonDao.readAllPokemon()
 }

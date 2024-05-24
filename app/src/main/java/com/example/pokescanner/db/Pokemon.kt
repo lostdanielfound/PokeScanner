@@ -1,10 +1,8 @@
 package com.example.pokescanner.db
 
-import androidx.annotation.DrawableRes
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import java.sql.Blob
 
 @Entity(tableName = "pokemon_table")
 data class Pokemon(
@@ -16,5 +14,5 @@ data class Pokemon(
     @ColumnInfo(name = "Height") val height: Float, // Metric Meters
     @ColumnInfo(name = "Weight") val weight: Float, // Metric Kilograms
     @ColumnInfo(name = "Description") val description: String,
-    @ColumnInfo(name = "Thumbnail") val thumbnail: Blob //Blob
+    @ColumnInfo(name = "Thumbnail") val thumbnail: String //Blob
 )

@@ -29,6 +29,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.pokescanner.screens.AppViewModel
 import com.example.pokescanner.screens.HomeScreen
 import com.example.pokescanner.screens.JournalScreen
+import com.example.pokescanner.screens.PokemonViewModel
 import com.example.pokescanner.screens.StatsScreen
 
 
@@ -41,9 +42,11 @@ sealed class NavigationScreen(val route: String, val title: String){
 @Composable
 fun PokeScannerApp(
     viewModel: AppViewModel = viewModel(),
+    pokemonViewModel: PokemonViewModel = viewModel(),
     navController: NavHostController = rememberNavController()
 ) {
     val uiState by viewModel.uiState.collectAsState()
+    val journalState by pokemonViewModel.getJournalList().collectAsState(initial = emptyList())
 
     Scaffold(
         bottomBar = {
@@ -57,7 +60,7 @@ fun PokeScannerApp(
                 .padding(it)
         ) {
             composable(NavigationScreen.Journal.route) {
-                JournalScreen()
+                JournalScreen(journalState)
             }
             composable(NavigationScreen.Home.route) {
                 HomeScreen(modifier = Modifier.fillMaxSize())

@@ -3,18 +3,18 @@ package com.example.pokescanner.screens
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.ViewModel
 import com.example.pokescanner.db.Pokemon
 import com.example.pokescanner.db.PokemonDatabase
 import com.example.pokescanner.db.PokemonRepository
+import kotlinx.coroutines.flow.Flow
 
-class PokemonViewModel(application: Application): AndroidViewModel(application) {
+class PokemonViewModel(pokemonRepository: PokemonRepository): ViewModel() {
 
-    private val repository: PokemonRepository
-    private val pokemonList: LiveData<List<Pokemon>>
+    private val _pokemonList = pokemonRepository.readAllPokemon
 
-    init {
-        val pokemonDao = PokemonDatabase.getDatabase(application).pokemonDao()
-        repository = PokemonRepository(pokemonDao)
-        pokemonList = repository.readAllPokemon
+    fun getJournalList(): Flow<List<Pokemon>> {
+        return _pokemonList
     }
+
 }
