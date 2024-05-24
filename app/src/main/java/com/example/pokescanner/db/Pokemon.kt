@@ -4,8 +4,9 @@ import androidx.annotation.DrawableRes
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import java.sql.Blob
 
-@Entity
+@Entity(tableName = "pokemon_table")
 data class Pokemon(
     @PrimaryKey(autoGenerate = true) @ColumnInfo(name = "ID") val ID: Int,
     @ColumnInfo(name = "Name") val name: String,
@@ -15,5 +16,5 @@ data class Pokemon(
     @ColumnInfo(name = "Height") val height: Float, // Metric Meters
     @ColumnInfo(name = "Weight") val weight: Float, // Metric Kilograms
     @ColumnInfo(name = "Description") val description: String,
-    @ColumnInfo(name = "Thumbnail") val thumbnail: String //Blob
+    @ColumnInfo(name = "Thumbnail") val thumbnail: Blob //Blob
 )
