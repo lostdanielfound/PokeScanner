@@ -1,5 +1,6 @@
 package com.example.pokescanner.composables
 
+import android.util.Log
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -39,6 +40,7 @@ fun EntryCardRow(pkmn: Pokemon, modifier: Modifier = Modifier) {
     ) {
         val borderWidth = 4.dp
         BitmapConverter.converterStringToBitmap(pkmn.thumbnail)?.let {
+            Log.w("EntryCardRow.Compose", "Bitmap Conversion Proceeded for ${pkmn.name}")
             Image(
                 bitmap = it.asImageBitmap(),
                 contentDescription = pkmn.name,

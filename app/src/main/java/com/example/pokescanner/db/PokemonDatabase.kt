@@ -23,7 +23,7 @@ abstract class PokemonDatabase: RoomDatabase() {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
                     PokemonDatabase::class.java,
-                    "Pokemon_database"
+                    "pokemon_database"
                 ).createFromAsset("database/pokemon.db").build()
                 INSTANCE = instance
                 return instance

@@ -3,6 +3,7 @@ package com.example.pokescanner.utils
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.util.Base64
+import android.util.Log
 import java.io.ByteArrayOutputStream
 
 object BitmapConverter {
@@ -13,11 +14,12 @@ object BitmapConverter {
         return Base64.encodeToString(byteArray, Base64.DEFAULT)
     }
 
-    fun converterStringToBitmap(encodedString: String): Bitmap? {
+    fun converterStringToBitmap(encodedString: ByteArray): Bitmap? {
         return try {
-            val encodeByte = Base64.decode(encodedString, Base64.DEFAULT)
+            val encodeByte = Base64.decode(encodedString.toString(), Base64.DEFAULT)
             BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.size)
         } catch (e: Exception) {
+            Log.e("convertStringToBitmap", "Failed to convert string to bitmap. ")
             e.printStackTrace()
             null
         }

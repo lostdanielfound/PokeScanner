@@ -9,6 +9,9 @@ import java.time.LocalDateTime
 data class CapturedPkmn(
     @PrimaryKey(autoGenerate = true) val capturedID: Int,
     @ColumnInfo(name = "pkmnfk_ID") val pkmn: Int,
-    @ColumnInfo(name = "capture_time") val capturedTime: LocalDateTime,
+
+    //LocalDateTime in kotlin
+    //String in SQLlite
+    @ColumnInfo(name = "capture_time") val capturedTime: String,
     @ColumnInfo(name = "image_base64") val imageBase64: String
 )
