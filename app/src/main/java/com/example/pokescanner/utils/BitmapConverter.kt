@@ -16,8 +16,7 @@ object BitmapConverter {
 
     fun converterStringToBitmap(encodedString: ByteArray): Bitmap? {
         return try {
-            val encodeByte = Base64.decode(encodedString.toString(), Base64.DEFAULT)
-            BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.size)
+            return BitmapFactory.decodeByteArray(encodedString, 0, encodedString.size)
         } catch (e: Exception) {
             Log.e("convertStringToBitmap", "Failed to convert string to bitmap. ")
             e.printStackTrace()
