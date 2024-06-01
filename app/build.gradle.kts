@@ -80,11 +80,11 @@ dependencies {
 
     //CameraX
     val cameraxVersion = "1.3.3"
-    ksp("androidx.camera:camera-core:${cameraxVersion}")
-    ksp("androidx.camera:camera-camera2:${cameraxVersion}")
-    ksp("androidx.camera:camera-lifecycle:${cameraxVersion}")
-    ksp("androidx.camera:camera-view:${cameraxVersion}")
-    ksp("androidx.camera:camera-extensions:${cameraxVersion}")
+    implementation("androidx.camera:camera-core:${cameraxVersion}")
+    implementation("androidx.camera:camera-camera2:${cameraxVersion}")
+    implementation("androidx.camera:camera-lifecycle:${cameraxVersion}")
+    implementation("androidx.camera:camera-view:${cameraxVersion}")
+    implementation("androidx.camera:camera-extensions:${cameraxVersion}")
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
