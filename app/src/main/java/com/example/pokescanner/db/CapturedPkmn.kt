@@ -12,6 +12,6 @@ data class CapturedPkmn(
 
     //LocalDateTime in kotlin
     //String in SQLlite
-    @ColumnInfo(name = "capture_time") val capturedTime: String,
+    @ColumnInfo(name = "capture_time") val capturedTime: String, //Need to be changed into LONG for epoch
     @ColumnInfo(name = "image_base64") val imageBase64: String
 )

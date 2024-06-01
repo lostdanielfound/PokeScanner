@@ -60,7 +60,7 @@ fun PokeScannerApp(
                 .padding(it)
         ) {
             composable(NavigationScreen.Journal.route) {
-                JournalScreen(journalState)
+                JournalScreen(pokemonList = journalState, entryOnClick = {}/* TODO: WTF DO i PUT HERE */)
             }
             composable(NavigationScreen.Home.route) {
                 HomeScreen(modifier = Modifier.fillMaxSize())

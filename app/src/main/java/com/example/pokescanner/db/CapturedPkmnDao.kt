@@ -5,6 +5,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface CapturedPkmnDao {
@@ -13,4 +14,7 @@ interface CapturedPkmnDao {
 
     @Query("SELECT * FROM capturedPkmn_table ORDER BY capturedID ASC")
     fun readAll(): LiveData<List<CapturedPkmn>>
+
+    @Query("SELECT * FROM capturedPkmn_table WHERE pkmnfk_ID == :pkmnID ORDER BY capture_time")
+    fun readCapturedPkmnList(pkmnID: Int): Flow<List<CapturedPkmn>>
 }

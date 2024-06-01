@@ -26,4 +26,8 @@ class PokemonViewModel(application: Application): AndroidViewModel(application) 
         return _pokemonList
     }
 
+    fun clickedEntry(pkmnID: Int) {
+
+    }
+
 }
