@@ -39,6 +39,7 @@ sealed class NavigationScreen(val route: String, val title: String){
     data object Stats : NavigationScreen("Stats", "Capture Stats")
 }
 
+
 @Composable
 fun PokeScannerApp(
     viewModel: AppViewModel = viewModel(),
