@@ -15,7 +15,7 @@ fun JournalScreen(
 ) {
     LazyColumn(modifier = modifier) {
         items(pokemonList) { entry ->
-            EntryCardRow(pkmn = entry, entryOnClick)
+            EntryCardRow(pkmn = entry, onClick = entryOnClick)
         }
     }
 }

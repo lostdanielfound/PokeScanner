@@ -27,7 +27,6 @@ fun HomeScreen(modifier: Modifier = Modifier) {
     val scaffoldState = rememberBottomSheetScaffoldState()
     val appContext = LocalContext.current
     val controller = remember {
-        //TODO: Find a way to pass applicationContext
         LifecycleCameraController(appContext).apply {
             setEnabledUseCases(
                 CameraController.IMAGE_CAPTURE

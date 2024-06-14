@@ -8,12 +8,12 @@ import androidx.compose.ui.Modifier
 
 @Composable
 fun EntryScreen(
-
+    pokedexID: Int,
     modifier: Modifier = Modifier
 ) {
     Box(
-        contentAlignment = Alignment.Center
+        contentAlignment = Alignment.Center,
     ) {
-        Text("EntryScreen Content")
+        Text("Passed In pokedex ID: $pokedexID")
     }
 }

@@ -27,9 +27,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.pokescanner.screens.AppViewModel
+import com.example.pokescanner.screens.EntryScreen
 import com.example.pokescanner.screens.HomeScreen
 import com.example.pokescanner.screens.JournalScreen
-import com.example.pokescanner.screens.PokemonViewModel
 import com.example.pokescanner.screens.StatsScreen
 
 
@@ -37,17 +37,17 @@ sealed class NavigationScreen(val route: String, val title: String){
     data object Journal : NavigationScreen("Journal", "Pokedex")
     data object Home : NavigationScreen("Home", "Home")
     data object Stats : NavigationScreen("Stats", "Capture Stats")
+    data object Entry : NavigationScreen("Entry", title = "Pkmn")
 }
 
 
 @Composable
 fun PokeScannerApp(
     viewModel: AppViewModel = viewModel(),
-    pokemonViewModel: PokemonViewModel = viewModel(),
     navController: NavHostController = rememberNavController()
 ) {
     val uiState by viewModel.uiState.collectAsState()
-    val journalState by pokemonViewModel.getJournalList().collectAsState(initial = emptyList())
+    val journalState by viewModel.getJournalList().collectAsState(initial = emptyList())
 
     Scaffold(
         bottomBar = {
@@ -61,13 +61,23 @@ fun PokeScannerApp(
                 .padding(it)
         ) {
             composable(NavigationScreen.Journal.route) {
-                JournalScreen(pokemonList = journalState, entryOnClick = {}/* TODO: WTF DO i PUT HERE */)
+                JournalScreen(
+                    pokemonList = journalState,
+                    entryOnClick = {
+                        pokedexID: Int ->
+                        viewModel.setPokedexIndex(pokedexID)
+                        navController.navigate(NavigationScreen.Entry.route)
+                    }
+                )
             }
             composable(NavigationScreen.Home.route) {
                 HomeScreen(modifier = Modifier.fillMaxSize())
             }
             composable(NavigationScreen.Stats.route) {
                 StatsScreen(stats = uiState.stats)
+            }
+            composable(NavigationScreen.Entry.route) {
+                EntryScreen(uiState.currentPokedexIndex)
             }
         }
     }
