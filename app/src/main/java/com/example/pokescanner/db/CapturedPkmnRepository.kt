@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import kotlinx.coroutines.flow.Flow
 
 class CapturedPkmnRepository(private val capturedPkmnDao: CapturedPkmnDao) {
-    val readAllCapturedEntries: LiveData<List<CapturedPkmn>> = capturedPkmnDao.readAll()
+    val readAllCapturedEntries: Flow<List<CapturedPkmn>> = capturedPkmnDao.readAll()
     suspend fun addCapturedEntry(entry: CapturedPkmn) {
         capturedPkmnDao.insert(entry)
     }

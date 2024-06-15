@@ -16,21 +16,33 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 
 class AppViewModel(application: Application) : AndroidViewModel(application) {
-    private val _uiState = MutableStateFlow(AppUiState(Stats(0,0,0), 1))
+
+    /*
+        ui state for the application set as a flow object to mutate state
+     */
+    private val _uiState = MutableStateFlow(
+        AppUiState(
+            Stats(
+                totalImagesTaken = 0,
+                totalPkmnCaptured = 0,
+                totalPkmnEntriesCompleted = 0,
+            ),
+            currentPokedexIndex = 1
+        )
+    )
     val uiState: StateFlow<AppUiState> = _uiState.asStateFlow()
 
-    //Need pokemonDao to get access by pokemonRepo
-    private val _pokemonList: Flow<List<Pokemon>>
-    private val pokemonRepository: PokemonRepository
+    private val pokemonList: Flow<List<Pokemon>> // Flow object that fills list of pokemon objects
+    private val pokemonRepository: PokemonRepository // Interactive Repository to access / modify
 
     init {
         val pokemonDao = PokemonDatabase.getDatabase(application).pokemonDao()
         pokemonRepository = PokemonRepository(pokemonDao)
-        _pokemonList = pokemonRepository.readAllPokemon
+        pokemonList = pokemonRepository.readAllPokemon
     }
 
     fun getJournalList(): Flow<List<Pokemon>> {
-        return _pokemonList
+        return pokemonList
     }
 
     fun setPokedexIndex(index: Int) {
@@ -39,6 +51,11 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
                 currentPokedexIndex = index
             )
         }
+    }
+
+    suspend fun readPokemon(index: Int): Flow<Pokemon> {
+        //run async dao function to collection pokemon object.
+        return pokemonRepository.readPokemon(index)
     }
 
     fun resetState() {

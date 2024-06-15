@@ -4,4 +4,7 @@ import kotlinx.coroutines.flow.Flow
 
 class PokemonRepository(private val pokemonDao: PokemonDao) {
     val readAllPokemon: Flow<List<Pokemon>> = pokemonDao.readAllPokemon()
+    suspend fun readPokemon(pokedexID: Int): Flow<Pokemon> {
+        return pokemonDao.readPokemon(pokedexID)
+    }
 }

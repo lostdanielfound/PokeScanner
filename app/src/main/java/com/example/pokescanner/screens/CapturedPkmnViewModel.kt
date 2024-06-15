@@ -8,11 +8,12 @@ import com.example.pokescanner.db.CapturedPkmn
 import com.example.pokescanner.db.CapturedPkmnDatabase
 import com.example.pokescanner.db.CapturedPkmnRepository
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 
 class CapturedPkmnViewModel(application: Application): AndroidViewModel(application) {
 
-    private val readAllData: LiveData<List<CapturedPkmn>>
+    private val readAllData: Flow<List<CapturedPkmn>>
     private val repository: CapturedPkmnRepository
 
     //Class constructor

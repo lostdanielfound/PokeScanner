@@ -5,6 +5,8 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import java.sql.Blob
 
+const val NULL_VALUE = 0
+
 @Entity(tableName = "pokemon_table")
 data class Pokemon(
     @PrimaryKey(autoGenerate = true) @ColumnInfo(name = "ID") val ID: Int,
@@ -17,3 +19,9 @@ data class Pokemon(
     @ColumnInfo(name = "Description", typeAffinity = ColumnInfo.TEXT) val description: String,
     @ColumnInfo(name = "Thumbnail", typeAffinity = ColumnInfo.BLOB) val thumbnail: ByteArray //Blob
 )
+
+/*
+Use this to insert record in table:
+INSERT INTO pokemon_table (ID, Name, Species, Type1, Type2, Height, Weight, Description, Thumbnail)
+VALUES (151, "MissingNo", "Unknown", "Normal", NULL, 0.0, 0.0, "...", NULL);
+ */

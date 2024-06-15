@@ -74,7 +74,7 @@ fun PokeScannerApp(
                 HomeScreen(modifier = Modifier.fillMaxSize())
             }
             composable(NavigationScreen.Stats.route) {
-                StatsScreen(stats = uiState.stats)
+                StatsScreen(uiState.stats)
             }
             composable(NavigationScreen.Entry.route) {
                 EntryScreen(uiState.currentPokedexIndex)

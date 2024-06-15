@@ -13,7 +13,7 @@ interface CapturedPkmnDao {
     suspend fun insert(record: CapturedPkmn)
 
     @Query("SELECT * FROM capturedPkmn_table ORDER BY capturedID ASC")
-    fun readAll(): LiveData<List<CapturedPkmn>>
+    fun readAll(): Flow<List<CapturedPkmn>>
 
     @Query("SELECT * FROM capturedPkmn_table WHERE pkmnfk_ID == :pkmnID ORDER BY capture_time")
     fun readCapturedPkmnList(pkmnID: Int): Flow<List<CapturedPkmn>>
