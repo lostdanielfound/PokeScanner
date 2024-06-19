@@ -17,7 +17,7 @@ data class Pokemon(
     @ColumnInfo(name = "Height", typeAffinity = ColumnInfo.REAL) val height: Double, // Metric Meters
     @ColumnInfo(name = "Weight", typeAffinity = ColumnInfo.REAL) val weight: Double, // Metric Kilograms
     @ColumnInfo(name = "Description", typeAffinity = ColumnInfo.TEXT) val description: String,
-    @ColumnInfo(name = "Thumbnail", typeAffinity = ColumnInfo.BLOB) val thumbnail: ByteArray //Blob
+    @ColumnInfo(name = "Thumbnail", typeAffinity = ColumnInfo.BLOB) val thumbnail: ByteArray? //Blob
 )
 
 /*

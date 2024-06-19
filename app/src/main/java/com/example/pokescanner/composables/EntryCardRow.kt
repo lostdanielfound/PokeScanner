@@ -44,22 +44,24 @@ fun EntryCardRow(pkmn: Pokemon, onClick: (Int) -> Unit, modifier: Modifier = Mod
             .fillMaxWidth()
     ) {
         val borderWidth = 4.dp
-        BitmapConverter.converterStringToBitmap(pkmn.thumbnail)?.let {
-            Log.w("EntryCardRow.Compose", "Bitmap Conversion Proceeded for ${pkmn.name}")
-            Image(
-                bitmap = it.asImageBitmap(),
-                contentDescription = pkmn.name,
-                contentScale = ContentScale.Fit,
-                modifier = Modifier
-                    .size(100.dp)
-                    .border(
-                        BorderStroke(borderWidth, MaterialTheme.colorScheme.onPrimaryContainer),
-                        CircleShape
-                    )
-                    .padding(borderWidth)
-                    .clip(CircleShape)
-                    .background(Color.White)
-            )
+        pkmn.thumbnail?.let {
+            BitmapConverter.converterStringToBitmap(it)?.let {
+                Log.w("EntryCardRow.Compose", "Bitmap Conversion Proceeded for ${pkmn.name}")
+                Image(
+                    bitmap = it.asImageBitmap(),
+                    contentDescription = pkmn.name,
+                    contentScale = ContentScale.Fit,
+                    modifier = Modifier
+                        .size(100.dp)
+                        .border(
+                            BorderStroke(borderWidth, MaterialTheme.colorScheme.onPrimaryContainer),
+                            CircleShape
+                        )
+                        .padding(borderWidth)
+                        .clip(CircleShape)
+                        .background(Color.White)
+                )
+            }
         }
         Spacer(modifier = Modifier.width(12.dp))
         Column(

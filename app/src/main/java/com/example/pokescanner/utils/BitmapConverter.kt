@@ -2,6 +2,7 @@ package com.example.pokescanner.utils
 
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.drawable.Drawable
 import android.util.Base64
 import android.util.Log
 import java.io.ByteArrayOutputStream
@@ -23,4 +24,5 @@ object BitmapConverter {
             null
         }
     }
+
 }
