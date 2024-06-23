@@ -11,5 +11,5 @@ interface PokemonDao {
 
     @Query("SELECT ID, Name, Species, Type1, Type2, Height, Weight, Description, Thumbnail " +
             "FROM pokemon_table WHERE ID == :pokedexID")
-    suspend fun readPokemon(pokedexID: Int): Flow<Pokemon>
+    suspend fun readPokemon(pokedexID: Int): Pokemon
 }

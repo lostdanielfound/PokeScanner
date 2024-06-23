@@ -1,11 +1,10 @@
 package com.example.pokescanner.db
 
+import androidx.compose.runtime.mutableStateOf
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import java.sql.Blob
-
-const val NULL_VALUE = 0
 
 @Entity(tableName = "pokemon_table")
 data class Pokemon(
@@ -19,6 +18,23 @@ data class Pokemon(
     @ColumnInfo(name = "Description", typeAffinity = ColumnInfo.TEXT) val description: String,
     @ColumnInfo(name = "Thumbnail", typeAffinity = ColumnInfo.BLOB) val thumbnail: ByteArray? //Blob
 )
+
+object NullPokemon {
+    private const val NULL_VALUE = 0
+    fun getNullPokemon(): Pokemon {
+        return Pokemon(
+            NULL_VALUE,
+            "---",
+            "---",
+            "---",
+            null,
+            0.0,
+            0.0,
+            "---",
+            null
+        )
+    }
+}
 
 /*
 Use this to insert record in table:

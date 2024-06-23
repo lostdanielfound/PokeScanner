@@ -65,7 +65,7 @@ fun PokeScannerApp(
                     pokemonList = journalState,
                     entryOnClick = {
                         pokedexID: Int ->
-                        viewModel.setPokedexIndex(pokedexID)
+                        viewModel.UpdatePokemonEntry(pokedexID)
                         navController.navigate(NavigationScreen.Entry.route)
                     }
                 )
@@ -77,7 +77,7 @@ fun PokeScannerApp(
                 StatsScreen(uiState.stats)
             }
             composable(NavigationScreen.Entry.route) {
-                EntryScreen(uiState.currentPokedexIndex)
+                EntryScreen(uiState.currentPokemonEntryView) /* Erm do something here so that it loads before loading pokemon entry */
             }
         }
     }
