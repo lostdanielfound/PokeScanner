@@ -17,6 +17,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.asImageBitmap
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -41,24 +42,24 @@ fun DetailedEntryCard(loadingPokemon: Pokemon) {
                         Thumbnail(
                             bitmap = it.asImageBitmap(),
                             contentDescription = loadingPokemon.name,
-                            size = 160.dp
+                            size = dimensionResource(R.dimen.Large_Thumbnail_Size)
                         )
                     }
             } else {
                 Thumbnail(
                     painter = painterResource(id = R.drawable.question),
                     contentDescription = "Loading",
-                    size = 160.dp
+                    size = dimensionResource(id = R.dimen.Large_Thumbnail_Size)
                 )
             }
         }
         Column(
-            verticalArrangement = Arrangement.spacedBy(6.dp),
+            verticalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.Medium_Padding)),
             modifier = Modifier
-                .padding(4.dp)
+                .padding(dimensionResource(id = R.dimen.Small_Padding))
         ) {
             Row(
-                horizontalArrangement = Arrangement.spacedBy(4.dp),
+                horizontalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.Small_Padding)),
                 verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier
             ) {
@@ -77,13 +78,13 @@ fun DetailedEntryCard(loadingPokemon: Pokemon) {
                     style = MaterialTheme.typography.bodyLarge
                 )
             }
-            Row(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
+            Row(horizontalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.Small_Padding))) {
                 TypeIcon(loadingPokemon.type1)
                 if (loadingPokemon.type2 != null) {
                     TypeIcon(loadingPokemon.type2)
                 }
             }
-            Row(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
+            Row(horizontalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.Small_Padding))) {
                 Text(
                     text = "Ht " + if (loadingPokemon.height == 0.0) "x.xx" else loadingPokemon.height.toString(),
                     style = MaterialTheme.typography.bodyLarge
@@ -125,7 +126,7 @@ fun TypeIcon(typeName: String) {
             containerColor = cardColor
         ),
         modifier = Modifier
-            .size(width = 50.dp, height = 22.dp)
+            .size(width = 54.dp, height = 22.dp)
     ) {
         Row(
             horizontalArrangement = Arrangement.Center,

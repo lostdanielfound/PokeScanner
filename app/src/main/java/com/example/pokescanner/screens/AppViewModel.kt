@@ -1,6 +1,7 @@
 package com.example.pokescanner.screens
 
 import android.app.Application
+import android.graphics.Bitmap
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableIntStateOf
@@ -61,6 +62,18 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
             }
         }
     }
+
+    /**
+     * onPhotoTaken will process the respective image as a bitmap
+     * through a pokemon classification model to make the best prediction of the pokemon
+     * identified in the image.
+     *
+     * Once analysis is complete, a dialog alert should pop-up showing the prediction.
+     * Image should be recorded within the CapturedPkmn DB.
+     */
+     fun onPhotoTaken(bitmap: Bitmap) {
+
+     }
 
     fun resetState() {
         _uiState.value = AppUiState(

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="Small_Padding">4dp</dimen>
+    <dimen name="Medium_Padding">6dp</dimen>
+    <dimen name="Large_Padding">12dp</dimen>
+    <dimen name="Box_Offset">16dp</dimen>
+    <dimen name="Medium_Thumbnail_Size">100dp</dimen>
+    <dimen name="Large_Thumbnail_Size">160dp</dimen>
+    <dimen name="Rounded_Small_Corner">6dp</dimen>
+    <dimen name="Rounded_Medium_Corner">10dp</dimen>
+</resources>
