@@ -1,4 +1,4 @@
-package com.example.pokescanner.screens
+package com.example.pokescanner.screens.statsscreen
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.isSystemInDarkTheme
