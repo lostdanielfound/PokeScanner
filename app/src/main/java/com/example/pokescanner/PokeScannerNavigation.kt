@@ -42,14 +42,11 @@ sealed class NavigationScreen(val route: String, val title: String){
 
 
 @Composable
-fun PokeScannerApp(
-    viewModel: AppViewModel = viewModel(),
+fun PokeScannerNavigation(
     navController: NavHostController = rememberNavController()
 ) {
 
     //TODO: Should not be passing around UI states to other UIs. Need to allow screens to have control of their own state through their own viewmodel.
-    val uiState by viewModel.uiState.collectAsState()
-    val journalState by viewModel.getJournalList().collectAsState(initial = emptyList())
 
     Scaffold(
         bottomBar = {
@@ -63,24 +60,17 @@ fun PokeScannerApp(
                 .padding(it)
         ) {
             composable(NavigationScreen.Journal.route) {
-
-                //TODO: Terrible way of passing functionality to the journalscreen.
-                JournalScreen(
-                    pokemonList = journalState,
-                    entryOnClick = {
-                        pokedexID: Int ->
-                        viewModel.UpdatePokemonEntry(pokedexID)
-                        navController.navigate(NavigationScreen.Entry.route)
-                    }
-                )
+                //TODO: Instead of using a Viewmodel function to pass in the functionality of onClick use navigation to pass in the pokemon ID.
+                JournalScreen()
             }
             composable(NavigationScreen.Home.route) {
-                HomeScreen(modifier = Modifier.fillMaxSize())
+                HomeScreen()
             }
             composable(NavigationScreen.Stats.route) {
-                StatsScreen(uiState.stats)
+                StatsScreen()
             }
             composable(NavigationScreen.Entry.route) {
+                //TODO: Find a way to pass in the pokemon ID through navigation
                 EntryScreen(uiState.currentPokemonEntryView) /* Erm do something here so that it loads before loading pokemon entry */
             }
         }
