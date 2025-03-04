@@ -1,4 +1,4 @@
-package com.example.pokescanner.screens
+package com.example.pokescanner.screens.journalscreen
 
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items

@@ -1,4 +1,4 @@
-package com.example.pokescanner.screens
+package com.example.pokescanner.screens.homescreen
 
 import android.content.Context
 import android.graphics.Bitmap
@@ -15,7 +15,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Camera
@@ -35,7 +34,6 @@ import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
 import com.example.pokescanner.R
 import com.example.pokescanner.composables.CameraPreview
-import com.example.pokescanner.composables.PhotoBottomSheetContent
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
