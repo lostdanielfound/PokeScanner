@@ -27,10 +27,10 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.pokescanner.screens.AppViewModel
-import com.example.pokescanner.screens.EntryScreen
-import com.example.pokescanner.screens.HomeScreen
-import com.example.pokescanner.screens.JournalScreen
-import com.example.pokescanner.screens.StatsScreen
+import com.example.pokescanner.screens.entryscreen.EntryScreen
+import com.example.pokescanner.screens.homescreen.HomeScreen
+import com.example.pokescanner.screens.journalscreen.JournalScreen
+import com.example.pokescanner.screens.statsscreen.StatsScreen
 
 
 sealed class NavigationScreen(val route: String, val title: String){
@@ -46,6 +46,8 @@ fun PokeScannerApp(
     viewModel: AppViewModel = viewModel(),
     navController: NavHostController = rememberNavController()
 ) {
+
+    //TODO: Should not be passing around UI states to other UIs. Need to allow screens to have control of their own state through their own viewmodel.
     val uiState by viewModel.uiState.collectAsState()
     val journalState by viewModel.getJournalList().collectAsState(initial = emptyList())
 
@@ -61,6 +63,8 @@ fun PokeScannerApp(
                 .padding(it)
         ) {
             composable(NavigationScreen.Journal.route) {
+
+                //TODO: Terrible way of passing functionality to the journalscreen.
                 JournalScreen(
                     pokemonList = journalState,
                     entryOnClick = {
