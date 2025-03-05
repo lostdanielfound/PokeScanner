@@ -23,9 +23,11 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.example.pokescanner.screens.AppViewModel
 import com.example.pokescanner.screens.entryscreen.EntryScreen
 import com.example.pokescanner.screens.homescreen.HomeScreen
@@ -37,7 +39,7 @@ sealed class NavigationScreen(val route: String, val title: String){
     data object Journal : NavigationScreen("Journal", "Pokedex")
     data object Home : NavigationScreen("Home", "Home")
     data object Stats : NavigationScreen("Stats", "Capture Stats")
-    data object Entry : NavigationScreen("Entry", title = "Pkmn")
+    data object Entry : NavigationScreen("Entry/{pokemonId}", title = "Pkmn")
 }
 
 
@@ -61,7 +63,11 @@ fun PokeScannerNavigation(
         ) {
             composable(NavigationScreen.Journal.route) {
                 //TODO: Instead of using a Viewmodel function to pass in the functionality of onClick use navigation to pass in the pokemon ID.
-                JournalScreen()
+                JournalScreen(
+                    onEntryClick = { pokemonId ->
+                        navController.navigate(NavigationScreen.Entry.route.replace("{pokemonId}", pokemonId.toString()))
+                    }
+                )
             }
             composable(NavigationScreen.Home.route) {
                 HomeScreen()
@@ -69,9 +75,12 @@ fun PokeScannerNavigation(
             composable(NavigationScreen.Stats.route) {
                 StatsScreen()
             }
-            composable(NavigationScreen.Entry.route) {
-                //TODO: Find a way to pass in the pokemon ID through navigation
-                EntryScreen(uiState.currentPokemonEntryView) /* Erm do something here so that it loads before loading pokemon entry */
+            composable(
+                route = NavigationScreen.Journal.route,
+                arguments = listOf(navArgument("pokemonId") { type = NavType.IntType })
+            ) {
+                val pokemonId = it.arguments?.getInt("pokemonId")
+                EntryScreen(pokemonId)
             }
         }
     }
