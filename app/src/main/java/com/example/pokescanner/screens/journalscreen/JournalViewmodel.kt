@@ -15,28 +15,19 @@ import kotlinx.coroutines.flow.asStateFlow
 
 class JournalViewmodel(application: Application): AndroidViewModel(application) {
 
-    private val _uiState = MutableStateFlow(
-        AppUiState(
-            Stats(
-                totalImagesTaken = 0,
-                totalPkmnCaptured = 0,
-                totalPkmnEntriesCompleted = 0,
-            ),
-            currentPokemonEntryView = NullPokemon.getNullPokemon()
-        )
-    )
-    val uiState: StateFlow<AppUiState> = _uiState.asStateFlow()
+    private val _journalState = MutableStateFlow()
+    val journalState: StateFlow<AppUiState> = _journalState.asStateFlow()
 
     private val pokemonList: Flow<List<Pokemon>> // Flow object that fills list of pokemon objects
     private val pokemonRepository: PokemonRepository // Interactive Repository to access / modify
 
-    init {
+    init { // Initialize the database and repository
         val pokemonDao = PokemonDatabase.getDatabase(application).pokemonDao()
         pokemonRepository = PokemonRepository(pokemonDao)
-        pokemonList = pokemonRepository.readAllPokemon
     }
 
     fun getJournalList(): Flow<List<Pokemon>> {
+        pokemonList = pokemonRepository.readAllPokemon
         return pokemonList
     }
 }
