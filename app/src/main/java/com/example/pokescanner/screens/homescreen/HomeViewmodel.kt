@@ -5,6 +5,8 @@ import androidx.lifecycle.ViewModel
 
 class HomeViewmodel(): ViewModel() {
 
+    private var _homeState = MutableStateFlow(homeState())
+    private val homeState = _homeState.asStateFlow()
     /**
      * onPhotoTaken will process the respective image as a bitmap
      * through a pokemon classification model to make the best prediction of the pokemon
@@ -15,5 +17,9 @@ class HomeViewmodel(): ViewModel() {
      */
     fun onPhotoTaken(bitmap: Bitmap) {
 
+    }
+
+    resetState() {
+        _homeState.value = homeState()
     }
 }
