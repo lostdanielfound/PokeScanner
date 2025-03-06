@@ -70,7 +70,9 @@ fun PokeScannerNavigation(
                 )
             }
             composable(NavigationScreen.Home.route) {
-                HomeScreen()
+                HomeScreen(
+                    onPhotoTaken = {} //TODO: Will most likely need to dedicate functality to viewmodel
+                )
             }
             composable(NavigationScreen.Stats.route) {
                 StatsScreen()
@@ -79,7 +81,7 @@ fun PokeScannerNavigation(
                 route = NavigationScreen.Journal.route,
                 arguments = listOf(navArgument("pokemonId") { type = NavType.IntType })
             ) {
-                val pokemonId = it.arguments?.getInt("pokemonId")
+                val pokemonId = it.arguments?.getInt("pokemonId") ?: 0 //null check
                 EntryScreen(pokemonId)
             }
         }
