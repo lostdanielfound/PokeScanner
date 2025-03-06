@@ -25,7 +25,7 @@ import com.example.pokescanner.db.Pokemon
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun EntryScreen(
-    loadingPokemon: Pokemon,
+    pokemonId: Int,
     modifier: Modifier = Modifier
 ) {
     /*
