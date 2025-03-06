@@ -25,6 +25,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.rememberBottomSheetScaffoldState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -32,6 +33,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.pokescanner.R
 import com.example.pokescanner.composables.CameraPreview
 
@@ -39,10 +41,12 @@ import com.example.pokescanner.composables.CameraPreview
 @Composable
 fun HomeScreen(
     onPhotoTaken: (Bitmap) -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    homeViewmodel: HomeViewmodel = viewModel()
 ) {
     val scaffoldState = rememberBottomSheetScaffoldState()
     val appContext = LocalContext.current // Current application context
+    val homeState = homeViewmodel.homeState.collectAsState()
 
     // Camera Controller, this val should only be modified or used within the HomeScreen
     val controller = remember {
