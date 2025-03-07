@@ -17,7 +17,6 @@ object Appmodule {
     @Provides
     @Singleton
     fun providesDatabaseRepository(@ApplicationContext applicationContext: Context): PokemonRepository {
-        //TODO need to figure out how to pass in the Application context
         val pokemonDao = PokemonDatabase.getDatabase(context = applicationContext).pokemonDao()
         return PokemonRepository(pokemonDao)
     }
