@@ -6,12 +6,14 @@ import androidx.lifecycle.ViewModel
 import com.example.pokescanner.db.Pokemon
 import com.example.pokescanner.db.PokemonDatabase
 import com.example.pokescanner.db.PokemonRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import javax.inject.Inject
 
+@HiltViewModel
 class JournalViewmodel @Inject constructor(
     pokemonRepositoryImpl: PokemonRepository,
 ): ViewModel() {
