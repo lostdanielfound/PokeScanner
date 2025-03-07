@@ -3,10 +3,14 @@ package com.example.pokescanner.screens.entryscreen
 import androidx.lifecycle.ViewModel
 import com.example.pokescanner.db.NullPokemon
 import com.example.pokescanner.db.Pokemon
+import com.example.pokescanner.db.PokemonRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import javax.inject.Inject
 
-class EntryViewmodel(): ViewModel() {
+class EntryViewmodel @Inject constructor(
+    pokemonRepositoryImpl: PokemonRepository
+): ViewModel() {
     private val _entryState = MutableStateFlow(EntryState(pokemon = NullPokemon.getNullPokemon()))
     val entryState = _entryState.asStateFlow()
 
