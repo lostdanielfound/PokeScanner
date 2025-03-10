@@ -9,7 +9,7 @@ import androidx.room.RoomDatabase
 abstract class PokemonDatabase: RoomDatabase() {
 
     abstract fun pokemonDao(): PokemonDao
-
+/*
     companion object {
         @Volatile
         private var INSTANCE: PokemonDatabase? = null
@@ -30,4 +30,6 @@ abstract class PokemonDatabase: RoomDatabase() {
             }
         }
     }
+
+ */
 }
