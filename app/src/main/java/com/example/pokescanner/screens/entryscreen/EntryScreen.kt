@@ -17,6 +17,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.pokescanner.composables.DetailedEntryCard
 import com.example.pokescanner.db.NullPokemon
@@ -28,7 +29,7 @@ import com.example.pokescanner.db.Pokemon
 fun EntryScreen(
     pokemonId: Int,
     modifier: Modifier = Modifier,
-    entryViewmodel: EntryViewmodel = viewModel()
+    entryViewmodel: EntryViewmodel = hiltViewModel()
 ) {
     /*
     https://medium.com/@nosilverbullet/jetpack-compose-suspend-functions-insit de-composables-c0ac4568eed4

@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 
-@HiltViewModel
+//@HiltViewModel
 class StatsViewmodel: ViewModel() {
     private val _statsState = MutableStateFlow(Stats(
         totalImagesTaken = 0,

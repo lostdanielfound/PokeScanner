@@ -11,18 +11,25 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.pokescanner.composables.FooterNote
 import com.example.pokescanner.R
 import com.example.pokescanner.composables.StatText
 
 @Composable
-fun StatsScreen(stats: Stats, modifier: Modifier = Modifier) {
+fun StatsScreen(
+    modifier: Modifier = Modifier,
+    statsViewmodel: StatsViewmodel = viewModel()
+) {
+    val statsState = statsViewmodel.statsState.collectAsState()
+
     Column(
         verticalArrangement = Arrangement.SpaceAround,
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -41,17 +48,17 @@ fun StatsScreen(stats: Stats, modifier: Modifier = Modifier) {
         ) {
             StatText(
                 stringResource(R.string.total_image_taken_en),
-                statInt = stats.totalImagesTaken,
+                statInt = statsState.value.totalImagesTaken,
                 modifier = Modifier.padding(top = 24.dp, bottom = 24.dp)
             )
             StatText(
                 stringResource(R.string.total_pkmn_captured_en),
-                statInt = stats.totalPkmnCaptured,
+                statInt = statsState.value.totalPkmnCaptured,
                 modifier = Modifier.padding(top = 24.dp, bottom = 24.dp)
             )
             StatText(
                 stringResource(R.string.total_pkmn_entries_en),
-                statInt = stats.totalPkmnEntriesCompleted,
+                statInt = statsState.value.totalPkmnEntriesCompleted,
                 modifier = Modifier.padding(top = 24.dp, bottom = 24.dp)
             )
         }

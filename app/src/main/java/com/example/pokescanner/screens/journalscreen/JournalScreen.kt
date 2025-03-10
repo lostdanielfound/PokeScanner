@@ -5,6 +5,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.pokescanner.composables.EntryCardRow
 import com.example.pokescanner.db.Pokemon
@@ -13,7 +14,7 @@ import com.example.pokescanner.db.Pokemon
 fun JournalScreen(
     onEntryClick: (Int) -> Unit,
     modifier: Modifier = Modifier,
-    journalViewmodel: JournalViewmodel = viewModel()
+    journalViewmodel: JournalViewmodel = hiltViewModel()
 ) {
     //Upon Viewmodel init, you should be able to get the pokemon list from the db.
     val journalState = journalViewmodel.journalState.collectAsState()

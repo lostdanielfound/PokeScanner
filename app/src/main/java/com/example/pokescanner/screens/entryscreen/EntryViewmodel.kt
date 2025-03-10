@@ -13,6 +13,7 @@ import javax.inject.Inject
 class EntryViewmodel @Inject constructor(
     pokemonRepositoryImpl: PokemonRepository
 ): ViewModel() {
+
     private val _entryState = MutableStateFlow(EntryState(pokemon = NullPokemon.getNullPokemon()))
     val entryState = _entryState.asStateFlow()
 

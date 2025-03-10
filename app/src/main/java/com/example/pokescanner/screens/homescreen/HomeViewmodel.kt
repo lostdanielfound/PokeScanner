@@ -2,13 +2,17 @@ package com.example.pokescanner.screens.homescreen
 
 import android.graphics.Bitmap
 import androidx.lifecycle.ViewModel
+import com.example.pokescanner.db.CapturedPkmnRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import javax.inject.Inject
 
 @HiltViewModel
-class HomeViewmodel(): ViewModel() {
+class HomeViewmodel @Inject constructor(
+    capturedPkmnRepository: CapturedPkmnRepository
+): ViewModel() {
 
     private val _homeState = MutableStateFlow(HomeState(temp = 0))
     val homeState: StateFlow<HomeState> = _homeState.asStateFlow()

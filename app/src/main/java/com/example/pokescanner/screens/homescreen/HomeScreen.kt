@@ -33,6 +33,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.pokescanner.R
 import com.example.pokescanner.composables.CameraPreview
@@ -42,7 +43,7 @@ import com.example.pokescanner.composables.CameraPreview
 fun HomeScreen(
     onPhotoTaken: (Bitmap) -> Unit,
     modifier: Modifier = Modifier,
-    homeViewmodel: HomeViewmodel = viewModel()
+    homeViewmodel: HomeViewmodel = hiltViewModel()
 ) {
     val scaffoldState = rememberBottomSheetScaffoldState()
     val appContext = LocalContext.current // Current application context
