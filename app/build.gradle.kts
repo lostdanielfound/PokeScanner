@@ -68,6 +68,7 @@ dependencies {
     val daggerVersion = "2.51.1"
     implementation("com.google.dagger:hilt-android:$daggerVersion")
     ksp("com.google.dagger:hilt-compiler:$daggerVersion")
+    implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
 
     //Room Dependencies
     val roomVersion = "2.6.1"
