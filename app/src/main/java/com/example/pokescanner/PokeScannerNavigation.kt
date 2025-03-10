@@ -1,8 +1,9 @@
 package com.example.pokescanner
 
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.List
+import androidx.compose.material.icons.automirrored.outlined.List
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.List
@@ -15,20 +16,17 @@ import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.example.pokescanner.screens.AppViewModel
 import com.example.pokescanner.screens.entryscreen.EntryScreen
 import com.example.pokescanner.screens.homescreen.HomeScreen
 import com.example.pokescanner.screens.journalscreen.JournalScreen
@@ -47,9 +45,6 @@ sealed class NavigationScreen(val route: String, val title: String){
 fun PokeScannerNavigation(
     navController: NavHostController = rememberNavController()
 ) {
-
-    //TODO: Should not be passing around UI states to other UIs. Need to allow screens to have control of their own state through their own viewmodel.
-
     Scaffold(
         bottomBar = {
             BottomNavBar(navController = navController)
@@ -62,7 +57,6 @@ fun PokeScannerNavigation(
                 .padding(it)
         ) {
             composable(NavigationScreen.Journal.route) {
-                //TODO: Instead of using a Viewmodel function to pass in the functionality of onClick use navigation to pass in the pokemon ID.
                 JournalScreen(
                     onEntryClick = { pokemonId ->
                         navController.navigate(NavigationScreen.Entry.route.replace("{pokemonId}", pokemonId.toString()))
@@ -78,7 +72,7 @@ fun PokeScannerNavigation(
                 StatsScreen()
             }
             composable(
-                route = NavigationScreen.Journal.route,
+                route = NavigationScreen.Entry.route,
                 arguments = listOf(navArgument("pokemonId") { type = NavType.IntType })
             ) {
                 val pokemonId = it.arguments?.getInt("pokemonId") ?: 0 //null check
@@ -90,8 +84,8 @@ fun PokeScannerNavigation(
 
 @Composable
 fun BottomNavBar(navController: NavHostController) {
-    val navigationFittedIcons = listOf(Icons.Filled.List, Icons.Filled.Home, Icons.Filled.Info)
-    val navigationOutlinedIcons = listOf(Icons.Outlined.List, Icons.Outlined.Home, Icons.Outlined.Info)
+    val navigationFittedIcons = listOf(Icons.AutoMirrored.Filled.List, Icons.Filled.Home, Icons.Filled.Info)
+    val navigationOutlinedIcons = listOf(Icons.AutoMirrored.Outlined.List, Icons.Outlined.Home, Icons.Outlined.Info)
 
     val screens = listOf(
         NavigationScreen.Journal,
