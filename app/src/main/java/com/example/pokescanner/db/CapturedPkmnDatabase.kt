@@ -9,6 +9,7 @@ import androidx.room.RoomDatabase
 abstract class CapturedPkmnDatabase: RoomDatabase() {
     abstract fun capturedPkmnDao(): CapturedPkmnDao
 
+    /*
     companion object{
         @Volatile //Creating an atomic Instance of the database
         private var INSTANCE: CapturedPkmnDatabase? = null
@@ -33,4 +34,6 @@ abstract class CapturedPkmnDatabase: RoomDatabase() {
             }
         }
     }
+
+     */
 }
