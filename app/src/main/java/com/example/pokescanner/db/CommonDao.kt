@@ -1,6 +1,5 @@
 package com.example.pokescanner.db
 
-import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -17,4 +16,10 @@ interface CapturedPkmnDao {
 
     @Query("SELECT * FROM capturedPkmn_table WHERE pkmnfk_ID == :pkmnID ORDER BY capture_time")
     fun readCapturedPkmnList(pkmnID: Int): Flow<List<CapturedPkmn>>
+}
+
+@Dao
+interface PlayerStatsDao {
+    @Query("SELECT * FROM playerStats_table WHERE rowID == :rowID")
+    fun readStats(rowID: Int): Flow<PlayerStats>
 }

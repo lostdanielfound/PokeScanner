@@ -1,6 +1,5 @@
 package com.example.pokescanner.db
 
-import androidx.lifecycle.LiveData
 import kotlinx.coroutines.flow.Flow
 
 class CapturedPkmnRepository(private val capturedPkmnDao: CapturedPkmnDao) {
@@ -12,4 +11,8 @@ class CapturedPkmnRepository(private val capturedPkmnDao: CapturedPkmnDao) {
     fun readCapturedPkmnList(PkmnID: Int): Flow<List<CapturedPkmn>> {
         return capturedPkmnDao.readCapturedPkmnList(PkmnID)
     }
+}
+
+class PlayerStatsRepository(private val playerStatsDao: PlayerStatsDao) {
+    val readPlayerStats: Flow<PlayerStats> = playerStatsDao.readStats(1)
 }

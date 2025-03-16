@@ -1,12 +1,8 @@
 package com.example.pokescanner.db
 
-import androidx.compose.ui.graphics.ImageBitmap
-import androidx.compose.ui.res.painterResource
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.example.pokescanner.R
-import java.time.LocalDateTime
 
 @Entity("capturedPkmn_table")
 data class CapturedPkmn(
@@ -17,4 +13,16 @@ data class CapturedPkmn(
     //String in SQLlite
     @ColumnInfo(name = "capture_time") val capturedTime: String, //Need to be changed into LONG for epoch
     @ColumnInfo(name = "image_base64") val imageBase64: String
+)
+
+@Entity(tableName = "playerStats_table")
+data class PlayerStats (
+    @PrimaryKey(autoGenerate = true) val rowID: Int,
+    @ColumnInfo val totalImagesTaken: Int = 0,
+    @ColumnInfo val totalPkmnCaptured: Int = 0,
+    @ColumnInfo val totalPkmnEntriesCompleted: Int = 0,
+    @ColumnInfo val medal1Completed: Boolean = false,
+    @ColumnInfo val medal2Completed: Boolean = false,
+    @ColumnInfo val medal3Completed: Boolean = false,
+    @ColumnInfo val medal4Completed: Boolean = false,
 )

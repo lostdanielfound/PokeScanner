@@ -1,13 +1,13 @@
 package com.example.pokescanner.db
 
-import android.content.Context
 import androidx.room.Database
-import androidx.room.Room
 import androidx.room.RoomDatabase
 
-@Database(entities = [CapturedPkmn::class], version = 1, exportSchema = true)
-abstract class CapturedPkmnDatabase: RoomDatabase() {
+@Database(entities = [CapturedPkmn::class, PlayerStats::class], version = 1, exportSchema = true)
+abstract class CommonDatabase: RoomDatabase() {
+
     abstract fun capturedPkmnDao(): CapturedPkmnDao
+    abstract fun playerStatsDao(): PlayerStatsDao
 
     /*
     companion object{

@@ -4,8 +4,8 @@ import android.content.Context
 import android.util.Log
 import androidx.room.Room
 import com.example.pokescanner.db.CapturedPkmnDao
-import com.example.pokescanner.db.CapturedPkmnDatabase
-import com.example.pokescanner.db.CapturedPkmnRepository
+import com.example.pokescanner.db.CommonDatabase
+import com.example.pokescanner.db.CommonDatabaseRepository
 import com.example.pokescanner.db.PokemonDao
 import com.example.pokescanner.db.PokemonDatabase
 import com.example.pokescanner.db.PokemonRepository
@@ -38,19 +38,19 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun providesCapturedPokemonDatabase(@ApplicationContext applicationContext: Context): CapturedPkmnDatabase {
-        Log.d("AppModule", "Building CapturedPokemon database")
+    fun providesCommonDatabase(@ApplicationContext applicationContext: Context): CommonDatabase {
+        Log.d("AppModule", "Building Common database")
         return Room.databaseBuilder(
             applicationContext,
-            CapturedPkmnDatabase::class.java,
-            "CapturedPkmn_database"
+            CommonDatabase::class.java,
+            "Common_database"
         ).build()
     }
 
     @Provides
-    fun provideCapturePokemonDao(capturedPkmnDatabase: CapturedPkmnDatabase): CapturedPkmnDao {
-        Log.d("AppModule", "Providing DAO from CapturedPkmnDatabase")
-        return capturedPkmnDatabase.capturedPkmnDao()
+    fun provideCommonDao(commonDatabase: CommonDatabase): CommonDao {
+        Log.d("AppModule", "Providing DAO from CommonDatabase")
+        return commonDatabase.capturedPkmnDao()
     }
 
 
@@ -63,8 +63,8 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun providesCapturedPkmnDatabaseRepo(capturedPkmnDao: CapturedPkmnDao): CapturedPkmnRepository {
-        Log.d("AppModule", "Providing database repository from capturedPkmnDao")
-        return CapturedPkmnRepository(capturedPkmnDao)
+    fun providesCommonRepo(commonDao: CommonDao): CommonRepository {
+        Log.d("AppModule", "Providing database repository from CommonDao.kt")
+        return CommonRepository(commonDao)
     }
 }
