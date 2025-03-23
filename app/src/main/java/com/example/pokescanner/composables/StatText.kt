@@ -13,7 +13,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun StatText(text: String, modifier: Modifier = Modifier, statInt: Int = -1) {
+fun StatText(text: String, modifier: Modifier = Modifier, statInt: Int?) {
     Row(
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically,
@@ -27,7 +27,7 @@ fun StatText(text: String, modifier: Modifier = Modifier, statInt: Int = -1) {
             color = if (isSystemInDarkTheme()) Color.White else Color.Black
         )
         Text(
-            if (statInt == -1) "#" else statInt.toString(),
+            statInt?.toString() ?: "#",
             fontSize = 24.sp,
             fontWeight = FontWeight.ExtraBold,
             color = if (isSystemInDarkTheme()) Color.White else Color.Black
