@@ -2,13 +2,17 @@ package com.example.pokescanner.screens.statsscreen
 
 import androidx.compose.runtime.collectAsState
 import androidx.lifecycle.ViewModel
+import com.example.pokescanner.db.PlayerStatsRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import javax.inject.Inject
 
-//@HiltViewModel
-class StatsViewmodel: ViewModel() {
+@HiltViewModel
+class StatsViewmodel @Inject constructor (
+    playerStatsImpl: PlayerStatsRepository
+): ViewModel() {
     private val _statsState = MutableStateFlow(Stats(
         totalImagesTaken = 0,
         totalPkmnCaptured = 0,
