@@ -18,7 +18,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.pokescanner.composables.FooterNote
 import com.example.pokescanner.R
 import com.example.pokescanner.composables.StatText
@@ -26,7 +26,7 @@ import com.example.pokescanner.composables.StatText
 @Composable
 fun StatsScreen(
     modifier: Modifier = Modifier,
-    statsViewmodel: StatsViewmodel = viewModel()
+    statsViewmodel: StatsViewmodel = hiltViewModel()
 ) {
     val statsState = statsViewmodel.statsState.collectAsState()
 
