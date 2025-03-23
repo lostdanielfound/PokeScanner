@@ -12,7 +12,9 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -22,6 +24,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.pokescanner.composables.DetailedEntryCard
 import com.example.pokescanner.db.NullPokemon
 import com.example.pokescanner.db.Pokemon
+import kotlinx.coroutines.launch
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -35,6 +38,7 @@ fun EntryScreen(
     https://medium.com/@nosilverbullet/jetpack-compose-suspend-functions-insit de-composables-c0ac4568eed4
      */
     val entryState = entryViewmodel.entryState.collectAsState()
+    val scope = rememberCoroutineScope()
 
     Scaffold(
         topBar = {
@@ -55,6 +59,11 @@ fun EntryScreen(
             modifier = Modifier
                 .padding(innerPadding)
         ) {
+            LaunchedEffect({}) {
+                scope.launch {
+                    entryViewmodel.updatePokemonEntry(pokemonId)
+                }
+            }
             DetailedEntryCard(entryState.value.pokemon)
             Row {
                 //Develop camera mechanism to put pictures here.
