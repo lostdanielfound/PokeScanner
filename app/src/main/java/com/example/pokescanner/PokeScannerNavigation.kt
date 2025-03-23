@@ -59,7 +59,10 @@ fun PokeScannerNavigation(
             composable(NavigationScreen.Journal.route) {
                 JournalScreen(
                     onEntryClick = { pokemonId ->
-                        navController.navigate(NavigationScreen.Entry.route.replace("{pokemonId}", pokemonId.toString()))
+                        navController.navigate(
+                            NavigationScreen.Entry.route
+                            .replace("{pokemonId}", pokemonId.toString())
+                        )
                     }
                 )
             }
