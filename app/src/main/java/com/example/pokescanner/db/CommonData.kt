@@ -3,6 +3,7 @@ package com.example.pokescanner.db
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.example.pokescanner.screens.statsscreen.Stats
 
 @Entity("capturedPkmn_table")
 data class CapturedPkmn(
@@ -18,11 +19,23 @@ data class CapturedPkmn(
 @Entity(tableName = "playerStats_table")
 data class PlayerStats (
     @PrimaryKey(autoGenerate = true) val rowID: Int,
-    @ColumnInfo val totalImagesTaken: Int = 0,
-    @ColumnInfo val totalPkmnCaptured: Int = 0,
-    @ColumnInfo val totalPkmnEntriesCompleted: Int = 0,
-    @ColumnInfo val medal1Completed: Boolean = false,
-    @ColumnInfo val medal2Completed: Boolean = false,
-    @ColumnInfo val medal3Completed: Boolean = false,
-    @ColumnInfo val medal4Completed: Boolean = false,
-)
+    @ColumnInfo("total_images_taken") val totalImagesTaken: Int = 0,
+    @ColumnInfo("total_pkmn_captured") val totalPkmnCaptured: Int = 0,
+    @ColumnInfo("total_pkmn_entries_completed") val totalPkmnEntriesCompleted: Int = 0,
+    @ColumnInfo("medal1_completed") val medal1Completed: Boolean = false,
+    @ColumnInfo("medal2_completed") val medal2Completed: Boolean = false,
+    @ColumnInfo("medal3_completed") val medal3Completed: Boolean = false,
+    @ColumnInfo("medal4_completed") val medal4Completed: Boolean = false,
+) {
+    fun toStats(): Stats {
+        return Stats(
+            totalImagesTaken = totalImagesTaken,
+            totalPkmnCaptured = totalPkmnCaptured,
+            totalPkmnEntriesCompleted = totalPkmnEntriesCompleted,
+            medal1Completed = medal1Completed,
+            medal2Completed = medal2Completed,
+            medal3Completed = medal3Completed,
+            medal4Completed = medal4Completed
+        )
+    }
+}
