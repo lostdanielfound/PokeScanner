@@ -1,11 +1,7 @@
 package com.example.pokescanner.screens.statsscreen
 
+import com.example.pokescanner.db.PlayerStats
+
 data class Stats(
-    val totalImagesTaken: Int,
-    val totalPkmnCaptured: Int,
-    val totalPkmnEntriesCompleted: Int,
-    val medal1Completed: Boolean,
-    val medal2Completed: Boolean,
-    val medal3Completed: Boolean,
-    val medal4Completed: Boolean,
+    val playerStats: PlayerStats
 )

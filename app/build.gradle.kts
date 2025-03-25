@@ -3,6 +3,7 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id("dagger.hilt.android.plugin")
     id("com.google.devtools.ksp")
+    kotlin("plugin.serialization") version "1.9.0"
 }
 
 android {
@@ -59,10 +60,13 @@ dependencies {
     implementation("androidx.compose.ui:ui")
     implementation("androidx.compose.ui:ui-graphics")
     implementation("androidx.compose.ui:ui-tooling-preview")
-    implementation("androidx.compose.material3:material3:1.2.1")
-    implementation("androidx.navigation:navigation-compose:2.7.7")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.0")
-    implementation("androidx.compose.material:material-icons-extended:1.6.8")
+    implementation("androidx.compose.material3:material3:1.3.1")
+    implementation("androidx.navigation:navigation-compose:2.8.9")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.7")
+    implementation("androidx.compose.material:material-icons-extended:1.7.8")
+
+    //Serialization
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3")
 
     //Dagger - Hilt
     val daggerVersion = "2.51.1"
@@ -80,8 +84,17 @@ dependencies {
     // optional - RxJava3 support for Room
     //implementation("androidx.room:room-rxjava3:$roomVersion")
 
+    //DateStore Dependencies
+    val datastoreVersion = "1.1.3"
+    // DataStore Preferences
+    implementation("androidx.datastore:datastore-preferences:$datastoreVersion")
+    implementation("androidx.datastore:datastore-preferences-core:$datastoreVersion")
+    // DataStore Photo
+    implementation("androidx.datastore:datastore:$datastoreVersion")
+    implementation("androidx.datastore:datastore-core:$datastoreVersion")
+
     //CameraX
-    val cameraxVersion = "1.3.3"
+    val cameraxVersion = "1.4.1"
     implementation("androidx.camera:camera-core:${cameraxVersion}")
     implementation("androidx.camera:camera-camera2:${cameraxVersion}")
     implementation("androidx.camera:camera-lifecycle:${cameraxVersion}")

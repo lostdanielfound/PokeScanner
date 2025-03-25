@@ -48,17 +48,17 @@ fun StatsScreen(
         ) {
             StatText(
                 stringResource(R.string.total_image_taken_en),
-                statInt = statsState.value?.totalImagesTaken,
+                statInt = statsState?.value?.playerStats?.totalImagesTaken,
                 modifier = Modifier.padding(top = 24.dp, bottom = 24.dp)
             )
             StatText(
                 stringResource(R.string.total_pkmn_captured_en),
-                statInt = statsState.value?.totalPkmnCaptured,
+                statInt = statsState.value?.playerStats?.totalPkmnCaptured,
                 modifier = Modifier.padding(top = 24.dp, bottom = 24.dp)
             )
             StatText(
                 stringResource(R.string.total_pkmn_entries_en),
-                statInt = statsState.value?.totalPkmnEntriesCompleted,
+                statInt = statsState.value?.playerStats?.totalPkmnEntriesCompleted,
                 modifier = Modifier.padding(top = 24.dp, bottom = 24.dp)
             )
         }

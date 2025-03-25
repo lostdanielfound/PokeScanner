@@ -2,10 +2,10 @@ package com.example.pokescanner.screens.statsscreen
 
 import android.util.Log
 import androidx.compose.runtime.collectAsState
+import androidx.datastore.core.DataStore
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.pokescanner.db.PlayerStats
-import com.example.pokescanner.db.PlayerStatsRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -18,18 +18,16 @@ import javax.inject.Inject
 
 @HiltViewModel
 class StatsViewmodel @Inject constructor (
-    playerStatsImpl: PlayerStatsRepository
+    playerStatsDatastoreImpl: DataStore<PlayerStats>
 ): ViewModel() {
-    private val _statsState = MutableStateFlow<Stats?>(null)
+    private var _statsState = MutableStateFlow<Stats?>(null)
     val statsState: StateFlow<Stats?> = _statsState.asStateFlow()
 
     init {
         Log.d("StatsViewmodel", "StatsViewmodel init")
         viewModelScope.launch(Dispatchers.IO) {
-            playerStatsImpl.readPlayerStats.collect { playerStats ->
-                _statsState.update {
-                    playerStats.toStats()
-                }
+            playerStatsDatastoreImpl.data.collect { playerStats ->
+                _statsState.value = Stats(playerStats)
             }
         }
     }

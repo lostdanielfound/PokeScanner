@@ -2,12 +2,15 @@ package com.example.pokescanner.singleton
 
 import android.content.Context
 import android.util.Log
+import androidx.datastore.core.DataStore
+import androidx.datastore.core.DataStoreFactory
+import androidx.datastore.dataStoreFile
 import androidx.room.Room
 import com.example.pokescanner.db.CapturedPkmnDao
 import com.example.pokescanner.db.CapturedPkmnRepository
-import com.example.pokescanner.db.CommonDatabase
-import com.example.pokescanner.db.PlayerStatsDao
-import com.example.pokescanner.db.PlayerStatsRepository
+import com.example.pokescanner.db.CapturedPkmnDatabase
+import com.example.pokescanner.db.PlayerStats
+import com.example.pokescanner.db.PlayerStatsSerializer
 import com.example.pokescanner.db.PokemonDao
 import com.example.pokescanner.db.PokemonDatabase
 import com.example.pokescanner.db.PokemonRepository
@@ -16,11 +19,15 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
 import javax.inject.Singleton
 
 @InstallIn(SingletonComponent::class)
 @Module
 object AppModule {
+
     @Provides
     @Singleton
     fun providesPokemonDatabase(@ApplicationContext applicationContext: Context): PokemonDatabase {
@@ -47,18 +54,18 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun providesCommonDatabase(@ApplicationContext applicationContext: Context): CommonDatabase {
+    fun providesCapturedPkmnDatabase(@ApplicationContext applicationContext: Context): CapturedPkmnDatabase {
         Log.d("AppModule", "Building Common database")
         return Room.databaseBuilder(
             applicationContext,
-            CommonDatabase::class.java,
-            "Common_database"
+            CapturedPkmnDatabase::class.java,
+            "CapturedPkmn_database"
         ).build()
     }
 
     @Provides
-    fun provideCapturedPkmnDao(commonDatabase: CommonDatabase): CapturedPkmnDao {
-        return commonDatabase.capturedPkmnDao()
+    fun provideCapturedPkmnDao(capturedPkmnDatabase: CapturedPkmnDatabase): CapturedPkmnDao {
+        return capturedPkmnDatabase.capturedPkmnDao()
     }
 
     @Provides
@@ -67,15 +74,16 @@ object AppModule {
         return CapturedPkmnRepository(capturedPkmnDao)
     }
 
-    @Provides
-    fun providePlayerStatsDao(commonDatabase: CommonDatabase): PlayerStatsDao {
-        return commonDatabase.playerStatsDao()
-    }
+    private const val DATA_STORE_FILE_NAME = "playerStats.json"
 
     @Provides
     @Singleton
-    fun providePlayerStatsRepo(playerStatsDao: PlayerStatsDao): PlayerStatsRepository {
-        return PlayerStatsRepository(playerStatsDao)
+    fun providesProtoDataStore(@ApplicationContext applicationContext: Context): DataStore<PlayerStats> {
+        return DataStoreFactory.create(
+            serializer = PlayerStatsSerializer,
+            produceFile = { applicationContext.dataStoreFile(DATA_STORE_FILE_NAME) },
+            corruptionHandler = null, // TODO: Add corruption handler
+        )
     }
 
 }
