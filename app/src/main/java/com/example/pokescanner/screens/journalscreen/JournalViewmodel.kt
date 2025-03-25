@@ -15,7 +15,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class JournalViewmodel @Inject constructor(
-    pokemonRepositoryImpl: PokemonRepository,
+    private val pokemonRepositoryImpl: PokemonRepository,
 ): ViewModel() {
 
     private val _journalState = MutableStateFlow(JournalState(temp = 0))
@@ -27,4 +27,5 @@ class JournalViewmodel @Inject constructor(
     fun getPokemonList(): Flow<List<Pokemon>> {
         return pokemonList
     }
+
 }

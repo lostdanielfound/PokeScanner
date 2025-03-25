@@ -18,7 +18,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class StatsViewmodel @Inject constructor (
-    playerStatsDatastoreImpl: DataStore<PlayerStats>
+    private val playerStatsDatastoreImpl: DataStore<PlayerStats>
 ): ViewModel() {
     private var _statsState = MutableStateFlow<Stats?>(null)
     val statsState: StateFlow<Stats?> = _statsState.asStateFlow()
@@ -28,6 +28,15 @@ class StatsViewmodel @Inject constructor (
         viewModelScope.launch(Dispatchers.IO) {
             playerStatsDatastoreImpl.data.collect { playerStats ->
                 _statsState.value = Stats(playerStats)
+            }
+        }
+    }
+
+    fun incrementTotalImageTaken() {
+        Log.d("StatsViewmodel", "incrementTotalImageTaken")
+        viewModelScope.launch(Dispatchers.IO) {
+            playerStatsDatastoreImpl.updateData { playerStats ->
+                playerStats.copy(totalImagesTaken = playerStats.totalImagesTaken + 1)
             }
         }
     }

@@ -10,6 +10,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Button
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
@@ -61,6 +63,12 @@ fun StatsScreen(
                 statInt = statsState.value?.playerStats?.totalPkmnEntriesCompleted,
                 modifier = Modifier.padding(top = 24.dp, bottom = 24.dp)
             )
+        }
+        Button(
+            modifier = Modifier.padding(top = 24.dp),
+            onClick = { statsViewmodel.incrementTotalImageTaken() }
+        ) {
+            Text("Increment Total Image Taken")
         }
         Spacer(modifier = Modifier.height(128.dp))
         FooterNote()
