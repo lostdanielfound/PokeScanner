@@ -25,6 +25,12 @@ class HomeViewmodel @Inject constructor(
      * Image should be recorded within the CapturedPkmn DB.
      */
     fun onPhotoTaken(bitmap: Bitmap) {
+        //Preprocessing media happenes here
+
+        // savePhoto(bitmap)
+    }
+
+    private fun savePhoto(bitmap: Bitmap) {
 
     }
 
