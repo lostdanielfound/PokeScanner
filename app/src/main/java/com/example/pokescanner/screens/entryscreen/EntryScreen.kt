@@ -3,11 +3,16 @@ package com.example.pokescanner.screens.entryscreen
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowLeft
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
@@ -31,6 +36,7 @@ import kotlinx.coroutines.launch
 @Composable
 fun EntryScreen(
     pokemonId: Int,
+    onNavigateBack: () -> Unit,
     modifier: Modifier = Modifier,
     entryViewmodel: EntryViewmodel = hiltViewModel()
 ) {
@@ -43,14 +49,23 @@ fun EntryScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { 
+                title = {
                     Row(
                         verticalAlignment = Alignment.CenterVertically
                     ) {
-                        Icon(imageVector = Icons.AutoMirrored.Filled.KeyboardArrowLeft, contentDescription = null)
                         Text(text = entryState.value.pokemon.name)
                     }
                 },
+                navigationIcon = {
+                    IconButton(
+                        onClick = onNavigateBack
+                    ) {
+                        Icon(
+                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                            contentDescription = "Navigate back to Journal Screen",
+                        )
+                    }
+                }
             ) 
         }
     ) { innerPadding ->
@@ -59,7 +74,7 @@ fun EntryScreen(
             modifier = Modifier
                 .padding(innerPadding)
         ) {
-            LaunchedEffect({}) {
+            LaunchedEffect({}) { // Happens only once when screen is loaded
                 scope.launch {
                     entryViewmodel.updatePokemonEntry(pokemonId)
                 }
@@ -75,5 +90,5 @@ fun EntryScreen(
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun EntryScreenPreview() {
-    EntryScreen(0)
+    EntryScreen(0, {})
 }
