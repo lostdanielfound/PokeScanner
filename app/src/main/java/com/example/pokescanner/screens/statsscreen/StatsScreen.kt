@@ -64,12 +64,6 @@ fun StatsScreen(
                 modifier = Modifier.padding(top = 24.dp, bottom = 24.dp)
             )
         }
-        Button(
-            modifier = Modifier.padding(top = 24.dp),
-            onClick = { statsViewmodel.incrementTotalImageTaken() }
-        ) {
-            Text("Increment Total Image Taken")
-        }
         Spacer(modifier = Modifier.height(128.dp))
         FooterNote()
     }
