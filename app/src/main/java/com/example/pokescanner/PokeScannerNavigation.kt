@@ -79,7 +79,7 @@ fun PokeScannerNavigation(
                 arguments = listOf(navArgument("pokemonId") { type = NavType.IntType })
             ) {
                 val pokemonId = it.arguments?.getInt("pokemonId") ?: 0 //null check
-                EntryScreen(pokemonId)
+                EntryScreen(pokemonId, onNavigateBack = { navController.popBackStack() })
             }
         }
     }
