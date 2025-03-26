@@ -31,13 +31,4 @@ class StatsViewmodel @Inject constructor (
             }
         }
     }
-
-    fun incrementTotalImageTaken() {
-        Log.d("StatsViewmodel", "incrementTotalImageTaken")
-        viewModelScope.launch(Dispatchers.IO) {
-            playerStatsDatastoreImpl.updateData { playerStats ->
-                playerStats.copy(totalImagesTaken = playerStats.totalImagesTaken + 1)
-            }
-        }
-    }
 }
