@@ -6,10 +6,8 @@ import androidx.compose.material.icons.automirrored.filled.List
 import androidx.compose.material.icons.automirrored.outlined.List
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Info
-import androidx.compose.material.icons.filled.List
 import androidx.compose.material.icons.outlined.Home
 import androidx.compose.material.icons.outlined.Info
-import androidx.compose.material.icons.outlined.List
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
@@ -67,9 +65,7 @@ fun PokeScannerNavigation(
                 )
             }
             composable(NavigationScreen.Home.route) {
-                HomeScreen(
-                    onPhotoTaken = {} //TODO: Will most likely need to dedicate functality to viewmodel
-                )
+                HomeScreen()
             }
             composable(NavigationScreen.Stats.route) {
                 StatsScreen()
