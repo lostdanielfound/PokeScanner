@@ -4,8 +4,8 @@ import androidx.compose.runtime.Composable
 import androidx.camera.view.LifecycleCameraController
 import androidx.camera.view.PreviewView
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.viewinterop.AndroidView
+import androidx.lifecycle.compose.LocalLifecycleOwner
 
 @Composable
 fun CameraPreview(
@@ -17,6 +17,7 @@ fun CameraPreview(
         factory = {
             PreviewView(it).apply {
                 this.controller = controller
+                controller.unbind()
                 controller.bindToLifecycle(lifecycleOwner)
             }
         },
