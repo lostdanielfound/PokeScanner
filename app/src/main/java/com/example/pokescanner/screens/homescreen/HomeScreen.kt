@@ -4,12 +4,14 @@ import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Matrix
 import android.util.Log
+import android.widget.Toast
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageCapture.OnImageCapturedCallback
 import androidx.camera.core.ImageCaptureException
 import androidx.camera.core.ImageProxy
 import androidx.camera.view.CameraController
 import androidx.camera.view.LifecycleCameraController
+import androidx.camera.view.PreviewView
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
@@ -32,8 +34,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.content.ContextCompat
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.pokescanner.R
 import com.example.pokescanner.composables.CameraPreview
@@ -41,23 +45,19 @@ import com.example.pokescanner.composables.CameraPreview
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
-    onPhotoTaken: (Bitmap) -> Unit,
     modifier: Modifier = Modifier,
     homeViewmodel: HomeViewmodel = hiltViewModel()
 ) {
     val scaffoldState = rememberBottomSheetScaffoldState()
-    val appContext = LocalContext.current // Current application context
-    val homeState = homeViewmodel.homeState.collectAsState()
+    val context = LocalContext.current
 
-    // Camera Controller, this val should only be modified or used within the HomeScreen
-    val controller = remember {
-        LifecycleCameraController(appContext).apply {
+    val cameraController = remember {
+        LifecycleCameraController(context).apply {
             setEnabledUseCases( // Can only capture images
                 CameraController.IMAGE_CAPTURE
             )
         }
     }
-
     BottomSheetScaffold(
         scaffoldState = scaffoldState,
         sheetPeekHeight = 0.dp,
@@ -70,9 +70,8 @@ fun HomeScreen(
                 .padding(padding)
         ) {
             CameraPreview(
-                controller = controller,
-                modifier = Modifier
-                    .fillMaxSize()
+                controller = cameraController,
+                modifier = Modifier.fillMaxSize()
             )
             Row(
                 horizontalArrangement = Arrangement.SpaceAround,
@@ -84,7 +83,7 @@ fun HomeScreen(
                 /* CameraSwitch Button */
                 IconButton(
                     onClick = {
-                        controller.cameraSelector = if (controller.cameraSelector == CameraSelector.DEFAULT_BACK_CAMERA) {
+                        cameraController.cameraSelector = if (cameraController.cameraSelector == CameraSelector.DEFAULT_BACK_CAMERA) {
                             CameraSelector.DEFAULT_FRONT_CAMERA
                         } else CameraSelector.DEFAULT_BACK_CAMERA
                     }
@@ -99,9 +98,9 @@ fun HomeScreen(
                 IconButton(
                     onClick = {
                         takePhoto(
-                            controller,
-                            onPhotoTaken,
-                            appContext
+                            cameraController,
+                            { bitmap -> homeViewmodel.onPhotoTaken(context, bitmap) },
+                            context
                         )
                     }
                 ) {
@@ -126,7 +125,7 @@ private fun takePhoto(
             override fun onCaptureSuccess(image: ImageProxy) {
                 super.onCaptureSuccess(image)
 
-                //Image is initially rotated by default, need to rotated from landscape to portrait
+                // Fucking Image is initially rotated by default, need to rotated from landscape to portrait
                 val matrix = Matrix().apply {
                     postRotate(image.imageInfo.rotationDegrees.toFloat()) // Applies rotation
                     // postScale(-1f, 1f) // If needed, mirrors the image on the X axis
@@ -147,6 +146,11 @@ private fun takePhoto(
             override fun onError(exception: ImageCaptureException) {
                 super.onError(exception)
                 Log.e("Camera", "Failed to take picture", exception)
+                Toast.makeText(
+                    context,
+                    "Error Occurred ${exception.message}",
+                    Toast.LENGTH_LONG
+                ).show()
             }
         }
     )
