@@ -1,5 +1,7 @@
 package com.example.pokescanner.screens.homescreen
 
+import android.graphics.Bitmap
+
 data class HomeState(
-    val temp: Int = 0
+    val photoCapture: Bitmap?
 )
