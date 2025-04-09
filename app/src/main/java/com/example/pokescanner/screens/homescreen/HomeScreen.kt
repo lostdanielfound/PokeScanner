@@ -42,6 +42,11 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.pokescanner.R
 import com.example.pokescanner.composables.CameraPreview
 
+/* TODO: When taking a picture it should process the image taken and show an alertdialog
+*       of the prediction. after so it should prompt the user to save or dispose of the image
+*       after the prompt, it should being the homescreen back to the foreground.
+* */
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
@@ -97,11 +102,12 @@ fun HomeScreen(
                 /* Take Picture Button */
                 IconButton(
                     onClick = {
-                        takePhoto(
+                        capturePhoto(
                             cameraController,
                             { bitmap -> homeViewmodel.onPhotoTaken(context, bitmap) },
                             context
                         )
+
                     }
                 ) {
                     Icon(
@@ -114,7 +120,7 @@ fun HomeScreen(
     }
 }
 
-private fun takePhoto(
+private fun capturePhoto(
     controller: LifecycleCameraController,
     onPhotoTaken: (Bitmap) -> Unit,
     context: Context
@@ -125,7 +131,7 @@ private fun takePhoto(
             override fun onCaptureSuccess(image: ImageProxy) {
                 super.onCaptureSuccess(image)
 
-                // Fucking Image is initially rotated by default, need to rotated from landscape to portrait
+                // Image is initially rotated by default, need to rotated from landscape to portrait
                 val matrix = Matrix().apply {
                     postRotate(image.imageInfo.rotationDegrees.toFloat()) // Applies rotation
                     // postScale(-1f, 1f) // If needed, mirrors the image on the X axis
