@@ -21,6 +21,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import java.util.Locale
 import javax.inject.Inject
@@ -30,7 +31,7 @@ class HomeViewmodel @Inject constructor(
     private val capturedPkmnImpl: CapturedPkmnRepository
 ): ViewModel() {
 
-    private val _homeState = MutableStateFlow(HomeState())
+    private val _homeState = MutableStateFlow(HomeState(null))
     val homeState: StateFlow<HomeState> = _homeState.asStateFlow()
 
     /**
@@ -43,6 +44,11 @@ class HomeViewmodel @Inject constructor(
      */
     fun onPhotoTaken(context: Context, bitmap: Bitmap) {
         //Preprocessing media happenes here
+        _homeState.update { state ->
+            state.copy(
+                photoCapture = bitmap
+            )
+        }
 
         saveImage(context, bitmap)
     }
@@ -107,6 +113,6 @@ class HomeViewmodel @Inject constructor(
     }
 
     fun resetState() {
-        _homeState.value = HomeState(temp = 0)
+        _homeState.value = HomeState(photoCapture = null)
     }
 }
